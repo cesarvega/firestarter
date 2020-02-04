@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
-import { Board, Task } from './board.model';
+import { Board, Task, Product } from './board.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,18 @@ export class BoardService {
       uid: user.uid,
       tasks: [{ description: 'Hello!', label: 'yellow' }]
     });
+
+  }
+  /**
+   * Creates a new proucts for the current user
+   */
+  async createProduct(data: Product) {
+    const user = await this.afAuth.auth.currentUser;
+    return this.db.collection('products').add({
+      ...data,
+      uid: user.uid,
+      photos: [{ description: 'Hello!', url: 'yellow' }]
+    });
   }
 
   /**
@@ -33,6 +45,23 @@ export class BoardService {
           return this.db
             .collection<Board>('boards', ref =>
               ref.where('uid', '==', user.uid).orderBy('priority')
+            )
+            .valueChanges({ idField: 'id' });
+        } else {
+          return [];
+        }
+      }),
+      // map(boards => boards.sort((a, b) => a.priority - b.priority))
+    );
+  }
+
+  getUserProducts() {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.db
+            .collection<any>('products', ref =>
+              ref.where('uid', '==', user.uid).orderBy('depth')
             )
             .valueChanges({ idField: 'id' });
         } else {

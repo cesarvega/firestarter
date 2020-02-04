@@ -41,6 +41,40 @@ export class BoardsListComponent implements OnInit, OnDestroy {
           title: result,
           priority: this.boards.length
         });
+
+        // create product
+        this.boardService.createProduct({          
+          name : 'product name',
+          active : true,
+          description : 'string',
+          cigarOrigin : 'string',
+          strength : 'string',
+          wrapperColor : 'string',
+          wrapper : 'string',
+          binder : 'string',
+          filler : 'string',
+          rolledBy : 'string',
+          manufacturer : 'string',
+          sku : 'string',
+          quantitysku : 10,
+          shippingFee : 10,
+          extraShippingFee : 10,
+          price : 10,
+          boxOf : 10,
+          boxOfPrice : 10,
+          comparedPrice : 10,
+          taxRate : 10,
+          priceTaxExcl : 10,
+          priceTaxIncl : 10,
+          itemsInstock : 10,
+          priority : 10,
+          smokeRings : 10,
+          photos : [ {description: 'one', url: 'assets/images/ecommerce/braies-lake.jpg'},
+                     {description: 'two', url: 'assets/images/ecommerce/fall-glow.jpg'}],
+        });
+
+
+
       }
     });
   }
