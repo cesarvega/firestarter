@@ -24,7 +24,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     HomePageComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,

@@ -29,8 +29,8 @@
 
         <!-- REPEAT -->
         <div class="col-md-4" *ngFor="let product of products; let i = index " fxLayoutAlign="center center"
-            style="background-color: white;">
-            <div class="card" style=" overflow: hidden;">
+            style="background-color: white;padding: 10px;">
+            <div class="card" style=" overflow: hidden; padding: 10px;">
              <!-- <div style="font-family: mouse;font-size: 50px;">abcdefghjklaxbcnvm</div> -->
                 <div class="card-body" style=" padding-bottom: 10px;">
                     <h4 class="card-title"><div style="font-family: caviar;padding-top: 10px;"><strong>{{product.name}}</strong></div></h4>
@@ -54,7 +54,7 @@
                                
                                 <div class="col-2">
                                     <button mastyle="font-family: hackerfont;" mat-icon-button color="primary"
-                                    matBadge="0" matBadgePosition="after" matBadgeColor="accent"  matBadgeOverlap="true">
+                                    matBadge="{{i%3}}" matBadgePosition="after" matBadgeColor="accent"  matBadgeOverlap="true">
                                         <mat-icon style="font-size: 20px;">shopping_basket</mat-icon>
                                       
                                     </button>
