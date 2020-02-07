@@ -16,9 +16,11 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+ 
 }
 mat-toolbar{
   height: auto;
+  background-color: greenyellow;
 }
 .mat-toolbar.mat-primary {
   position: sticky;
@@ -46,5 +48,5 @@ i {
   font-size: 1.2em;
   cursor: pointer;
   outline: none;
-  width: 150px;
+  width: 370px;
 }
