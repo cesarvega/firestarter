@@ -15,6 +15,8 @@ export class BoardsListComponent implements OnInit, OnDestroy {
 
   boards: Board[];
   sub: Subscription;
+  products: Board[];
+  productSub: Subscription;
 
   constructor(public boardService: BoardService, public dialog: MatDialog) {}
 
@@ -22,6 +24,15 @@ export class BoardsListComponent implements OnInit, OnDestroy {
     this.sub = this.boardService
       .getUserBoards()
       .subscribe(boards => (this.boards = boards));
+      console.log(this.boards);
+
+      this.productSub = this.boardService.getUserProducts()
+      .subscribe(products => 
+       { this.products = products
+        console.log(this.products);
+      }
+        );
+
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -67,19 +78,17 @@ export class BoardsListComponent implements OnInit, OnDestroy {
           priceTaxExcl : 10,
           priceTaxIncl : 10,
           itemsInstock : 10,
-          priority : 10,
+          priority : this.products.length,
           smokeRings : 10,
           photos : [ {description: 'one', url: 'assets/images/ecommerce/braies-lake.jpg'},
                      {description: 'two', url: 'assets/images/ecommerce/fall-glow.jpg'}],
         });
-
-
-
       }
     });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.productSub.unsubscribe();
   }
 }

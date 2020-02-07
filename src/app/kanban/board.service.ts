@@ -23,17 +23,7 @@ export class BoardService {
     });
 
   }
-  /**
-   * Creates a new proucts for the current user
-   */
-  async createProduct(data: Product) {
-    const user = await this.afAuth.auth.currentUser;
-    return this.db.collection('products').add({
-      ...data,
-      uid: user.uid,
-      photos: [{ description: 'Hello!', url: 'yellow' }]
-    });
-  }
+ 
 
   /**
    * Get all boards owned by current user
@@ -55,23 +45,7 @@ export class BoardService {
     );
   }
 
-  getUserProducts() {
-    return this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.db
-            .collection<any>('products', ref =>
-              ref.where('uid', '==', user.uid).orderBy('depth')
-            )
-            .valueChanges({ idField: 'id' });
-        } else {
-          return [];
-        }
-      }),
-      // map(boards => boards.sort((a, b) => a.priority - b.priority))
-    );
-  }
-
+  
   /**
    * Run a batch write to change the priority of each board for sorting
    */
@@ -93,6 +67,8 @@ export class BoardService {
       .delete();
   }
 
+ 
+
   /**
    * Updates the tasks on board
    */
@@ -102,6 +78,8 @@ export class BoardService {
       .doc(boardId)
       .update({ tasks });
   }
+
+ 
 
   /**
    * Remove a specifc task from the board
@@ -114,4 +92,51 @@ export class BoardService {
         tasks: firebase.firestore.FieldValue.arrayRemove(task)
       });
   }
+
+//***************************************************************************************************** */
+ /**
+   * Creates a new proucts for the current user
+   */
+  async createProduct(data: Product) {
+    const user = await this.afAuth.auth.currentUser;
+    return this.db.collection('products').add({
+      ...data,
+      uid: user.uid
+    });
+  }
+
+  getUserProducts() {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.db
+            .collection<Product>('products', ref =>
+              ref.where('uid', '==', user.uid).orderBy('priority')
+            )
+            .valueChanges({ idField: 'id' });
+        } else {
+          return [];
+        }
+      }),
+      // map(boards => boards.sort((a, b) => a.priority - b.priority))
+    );
+  }
+
+
+  updateProducts(product: Product) {
+    return this.db
+      .collection('products')
+      .doc(product.id)
+      .update({ product });
+  }
+
+  deleteProduct(productId: string) {
+    return this.db
+      .collection('products')
+      .doc(productId)
+      .delete();
+  }
+
+
+
 }

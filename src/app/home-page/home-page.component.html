@@ -1,16 +1,74 @@
+<!-- 
+<header fxLayout="column" style="background-color: black;">
+    <div fxFlex="50%">
+    <h1 >Angular Home</h1>
+    </div>
+    <div  fxFlexOffset="10px" fxLayout="row wrap" fxLayout.gt-sm="column" fx fxLayoutGap="10px" fxFlex="100%" fxFlex.gt-sm="100%" fxLayoutAlign="space-between center"> 
+        <div class="card" fxFlex="replay_10"  fxLayoutAlign="center center" style="background-color: red;"> 1</div>
+        <div class="card" fxFlex="20" style="background-color: blue;"> 2</div>
+        <div class="card" fxFlex="20" style="background-color: yellow;"> 3</div>
+        <div class="card" fxFlex="20" style="background-color: green;"> 4</div>
+        <div class="card" fxFlex="20" style="background-color: lightblue;"> 5</div>
+        <div class="card" fxFlex="20" style="background-color: lightcoral;"> 6</div>
+    </div>
+    
+</header> -->
 
-<header>
-    <h1>Angular Firestarter</h1>
-
-    <iframe src="https://player.vimeo.com/video/359329279?color=ff9933&title=0&byline=0&portrait=0" width="640" height="361" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/OWy0e231eMI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <p>
-        <a mat-raised-button color="accent" style="margin-right: 10px;" href="https://fireship.io/courses/angular" target="blank">Build this App</a>
-        <a mat-raised-button href="https://github.com/codediodeio/angular-firestarter" target="blank">Source</a>
-    </p>
+<!-- <div  fxFlexOffset="10px" fxLayout="row wrap-reverse" fxLayout.gt-sm="column" fx fxLayoutGap="10px" fxFlex="100%" fxFlex.gt-sm="100%" fxLayoutAlign="space-between center">  -->
 
 
-</header>
+<!-- 
+<div class="container-fluid">
+    <div class="row" *ngFor="let product of products ">
+        <div class="col-sm py-1">
+            <mat-card fxLayoutAlign="center center"> {{product.priority}}</mat-card>
+        </div>
 
 
+        
+    </div> -->
+<!-- <div class="container-fluid">
+    <div class="row" fxLayoutAlign="center center" >
+        <div style="background-color: blueviolet;" class="container-sm">100% wide until small breakpoint</div>
+        <div style="background-color: red;"  class="container-md">100% wide until medium breakpoint</div>
+        <div style="background-color: green;"  class="container-lg">100% wide until large breakpoint</div>
+        <div style="background-color: greenyellow;"  class="container-xl">100% wide until extra large breakpoint</div>
+    </div> -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"  *ngFor="let product of HEROES " fxLayoutAlign="center center" style="background-color: blueviolet;">                 
+                <div style="background-color: blueviolet;">100% wide until small breakpoint</div>                
+            </div>    
+        </div>
+    </div>
+
+    <!-- <div class="container-fluid">
+        <div class="row" >
+          <div class="col-md" fxLayoutAlign="center center" *ngFor="let product of products ">
+            One of three columns {{product.priority}}
+          </div>
+         
+        </div>
+      </div> -->
+
+    <!-- <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm" *ngFor="let product of products ">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Free</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>10 users included</li>
+                    <li>2 GB of storage</li>
+                    <li>Email support</li>
+                    <li>Help center access</li>
+                    <mat-card> {{product.priority}}</mat-card>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+            </div>
+        </div>    
+    </div> -->
+
+<!-- </div> -->
