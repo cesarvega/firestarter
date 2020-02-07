@@ -7,15 +7,27 @@
 header {
     text-align: center;
 }
-.card-cv {
-    // text-align: center;
-    height: 100px;
+.card-body {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    min-height: 1px;
+    /* padding: 1.25rem; */
 }
-.mat-card-header-text {
-    /* margin: 0 16px; */
-   
+
+.card-title {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    min-height: 1px;
+    /* padding: 1.25rem; */
 }
+
 .mat-card {
     /* margin: 0 16px; */
     width: 449px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: -20px;
+    margin-bottom: 0rem;
+    // text-align: center;
 }

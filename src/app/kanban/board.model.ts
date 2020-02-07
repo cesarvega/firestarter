@@ -15,6 +15,7 @@ export interface Product {
   name?: string;
   active?: boolean;
   description?: string;
+  smallDescription?: string;
   cigarOrigin?: string;
   strength?: string;
   wrapperColor?: string;

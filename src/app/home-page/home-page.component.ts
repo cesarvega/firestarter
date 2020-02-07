@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BoardService } from '../kanban/board.service';
-import { Board } from '../kanban/board.model';
+import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
-  products: Board[];
+  products: Product[];
   productSub: Subscription;
   HEROES = [
     { id: 1, name: 'Superman' },

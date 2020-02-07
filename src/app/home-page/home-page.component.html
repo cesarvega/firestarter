@@ -24,51 +24,119 @@
         <div style="background-color: greenyellow;"  class="container-xl">100% wide until extra large breakpoint</div>
     </div> -->
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         <!-- REPEAT -->
         <div class="col-md-4" *ngFor="let product of products; let i = index " fxLayoutAlign="center center"
             style="background-color: white;">
-
+            <div class="card" style=" overflow: hidden;">
+             <!-- <div style="font-family: mouse;font-size: 50px;">abcdefghjklaxbcnvm</div> -->
+                <div class="card-body" style=" padding-bottom: 10px;">
+                    <h4 class="card-title"><div style="font-family: caviar;padding-top: 10px;"><strong>{{product.name}}</strong></div></h4>
+                    <!-- <div class="card-title"><div style="font-family: caviar; font-size: xx-small;"><strong>{{product.smallDescription}}</strong></div> -->
+                    <p class="card-text" style="font-family: caviar; font-size: small;">{{product.smallDescription}}</p>
+                       
+                            <div class="row">
+                                <div class="col-5">
+                                    <img mat-card-image src="assets/images/cigars/601_{{i%3}}.png" style="width: 300px;margin-left: -181.1px;" alt="product.name">                                 
+                                </div>
+                                <div class="col-2">
+                                    <button mat-icon-button style="font-family: hackerfont;">
+                                       <span style="font-size: 20px;">$ {{product.price}}</span> 
+                                    </button>
+                                </div>
+                                <div class="col-2">
+                                    <button mat-icon-button  color="warn" style="font-family: hackerfont;">
+                                        <mat-icon style="font-size: 20px;" >favorite_border</mat-icon>
+                                    </button>
+                                </div>
+                               
+                                <div class="col-2">
+                                    <button mastyle="font-family: hackerfont;" mat-icon-button color="primary"
+                                    matBadge="0" matBadgePosition="after" matBadgeColor="accent"  matBadgeOverlap="true">
+                                        <mat-icon style="font-size: 20px;">shopping_basket</mat-icon>
+                                      
+                                    </button>
+                                
+                                </div>
+                                <div class="col-1">
+                                    <!-- <button mat-button style="font-family: hackerfont;">
+                                        <mat-icon color="warn">favorite_border</mat-icon>
+                                    </button> -->
+                                </div>
+                                  <!-- <mat-accordion>
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title> <strong style="font-family: hackers;">more...</strong>
+                                
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+                                                    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                
+                                            <p>{{product.description}}</p>
+                                        </mat-expansion-panel>
+                                
+                                    </mat-accordion> -->
+                            </div>
+                        
+                </div>
+            </div>
             <!-- CELL -->
-            <mat-card class="example-card bd-highlight py-5 px-5" style="border: solid green 2px;overflow: hidden;" >
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title style="font-family: caviar;"><strong>{{product.name}}</strong></mat-card-title>
-                    <mat-card-subtitle><strong>{{product.smallDescription}}</strong></mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image src="assets/images/cigars/601_{{i%3}}.png" style="
-                width: 710px;
-                margin-left: -408.1px;" alt="product.name">
-                <div class="h1 p-6"></div>
-
-
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title> <strong style="font-family: hackers;">more...</strong>
-
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-
-                        {{product.description}}
-                    </mat-expansion-panel>
-
-                </mat-accordion>
-                <mat-card-actions fxLayoutAlign="end endI">
-                    <button mat-button style="font-family: hackerfont;">   
-                        <mat-icon color="mat-red">favorite_border</mat-icon>
-                    </button>
-                    <button mat-button style="font-family: hackerfont;">   
-                        <mat-icon color="accent">shopping_basket</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </mat-card>
-            <div style="background-color: blueviolet;">{{product.priority}}</div>
+     
         </div>
     </div>
 </div>
+
+    <!-- <mat-accordion>
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title> <strong style="font-family: hackers;">more...</strong>
+                                
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+                                                    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                
+                                            {{product.description}}
+                                        </mat-expansion-panel>
+                                
+                                    </mat-accordion> -->
+<!-- 
+<mat-card class="example-card bd-highlight py-5 px-5" style="border: solid green 2px;overflow: hidden;">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="font-family: caviar;"><strong>{{product.name}}</strong></mat-card-title>
+        <mat-card-subtitle><strong>{{product.smallDescription}}</strong></mat-card-subtitle>
+    </mat-card-header>
+   
+    <div class="h1 p-6"></div>
+
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <strong style="font-family: hackers;">more...</strong>
+
+                </mat-panel-title>
+                <mat-panel-description>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            {{product.description}}
+        </mat-expansion-panel>
+
+    </mat-accordion>
+    <mat-card-actions fxLayoutAlign="end endI">
+        <button mat-button style="font-family: hackerfont;">
+            <mat-icon color="mat-red">favorite_border</mat-icon>
+        </button>
+        <button mat-button style="font-family: hackerfont;">
+            <mat-icon color="accent">shopping_basket</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card> -->
