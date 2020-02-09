@@ -31,3 +31,38 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0rem;
     // text-align: center;
 }
+.btn:focus {
+    outline: none;
+  }
+
+  .css-class-3{   
+    font-size: 56px;
+    margin: 10px;
+}
+  .css-class-1{
+    font-size: 22px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+  .css-class-2{
+    font-size: 20px;
+
+  }
+
+  .box {
+    // margin: 50px auto;
+    // background: #5FCF80;
+    // width: 150px;
+    // height: 150px;
+  }
+  .box:hover {
+    transform: rotate(360deg);
+    // background: #9351A6;
+    // border-radius: 50%;
+  }
+  .rotate {
+    transition: all 0.5s ease-in-out;
+  }
+  .rotate:hover {
+    transition: all 1s ease-in-out;
+  }

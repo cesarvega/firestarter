@@ -1,13 +1,96 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="background-color: black;">
+  <!-- <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span>
+  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span>
+  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span> -->
+  <!-- <span routerLink="/"><img src="assets/images/logos/bi-logo-with-tagline.svg" class="logo" alt=""></span>  -->
+  <span routerLink="/login"><img src="assets/images/cigars/cigarTotalLabel.png" class="logo" alt=""></span>
+  <!-- <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span>
+  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span>
+  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
+      alt=""></span> -->
+</div>
+<br>
+<div fxLayoutAlign="center center" style="background-color: #e9ecef;">
+  <ngb-carousel *ngIf="images && !(isHandset$ | async)">
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[0]" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[1]" alt="Random second slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="images[2]" alt="Random third slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <!-- <div *ngIf="!(isHandset$ | async)" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img [src]="images[2]" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img [src]="images[2]" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img [src]="images[3]" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div> -->
+</div>
+<ng-content></ng-content>
 
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
-   <!-- <span routerLink="/"><img src="assets/images/logos/bi-logo-with-tagline.svg" class="logo" alt=""></span>  -->
-    <span routerLink="/"><img src="assets/images/cigars/cigarLogoLabelWeb.png" class="logo" alt=""></span>
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
-    <span routerLink="/"><img src="assets/images/cigars/sides.png" class="logo" alt=""></span>
+
+
+<div class="row footer">
+  <div class="col-12" fxLayoutAlign="center center" style=" padding-left: 40px;">
+
+    <!-- <button mat-button class="" style="outline: none;">
+      <span style="font-size: 35px; outline: none;font-family: hackers;color: white;background-color: black;">$</span>
+
+    </button> -->
+    <div class="rounded-pill mat-elevation-z4 btn" style="background-color: black;
+     outline: none;
+     font-family: hackers;
+     text-align: center;
+     color: white;
+     border: 2px solid goldenrod;
+     width: 110px;
+     position: absolute;
+     bottom: 10px;
+
+    ">
+      <span style="font-family: hackers;font-size: 30;">YOU-PAY</span><br><span style="font-family: caviar;">$:13.22</span>
+    </div>
   </div>
-  <br>
-  <ng-content></ng-content>
+
+</div>

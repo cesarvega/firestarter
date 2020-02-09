@@ -27,15 +27,26 @@ export class HomePageComponent implements OnInit, OnDestroy {
     { id: 4, name: 'Flash' }
   ];
   panelOpenState = false;
+  isDirty = false;
+  whisMe = false;
+  badgeNumber = 0;
+  images: { "id": number; "url": string; }[];
   constructor(public boardService: BoardService) { }
   ngOnInit(): void {
 
     this.productSub = this.boardService.getUserProducts()
       .subscribe(products => {
-      this.products = products
+        this.products = products
         // console.log(this.products);
       }
       );
+
+
+      this.images = [
+        {"id":1, "url":"assets/img/header.jpeg"},
+        {"id":2, "url":"assets/img/velo2.jpeg"},
+        {"id":3, "url":"assets/img/velo3.jpeg"},
+          ]
 
   }
 
@@ -44,5 +55,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.productSub.unsubscribe();
   }
 
+  playAudio(butonName: string) {
+
+
+    let audio = new Audio();
+    switch (butonName) {
+      case 'heart':      
+      audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
+      this.whisMe = !this.whisMe;
+      break;
+      
+      case 'remove':      
+      this.badgeNumber = this.badgeNumber - 1 ;
+      break;
+      
+      default:
+        audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/ui_lock.wav";
+        this.badgeNumber = this.badgeNumber + 1 ;
+        break;
+    }
+
+    audio.load();
+    audio.play();
+   
+    this.isDirty = true;
+  }
 
 }
+
+

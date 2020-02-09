@@ -106,21 +106,32 @@ export class BoardService {
   }
 
   getUserProducts() {
-    return this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
+ 
           return this.db
             .collection<Product>('products', ref =>
-              ref.where('uid', '==', user.uid).orderBy('priority')
+              ref.where('uid', '==', 'LpVdaZbBcHZpgl5Uib6flNjQfJH3').orderBy('priority')
             )
             .valueChanges({ idField: 'id' });
-        } else {
-          return [];
-        }
-      }),
-      // map(boards => boards.sort((a, b) => a.priority - b.priority))
-    );
+        
+  
   }
+
+  // getUserProducts() {
+  //   return this.afAuth.authState.pipe(
+  //     switchMap(user => {
+  //       if (user) {
+  //         return this.db
+  //           .collection<Product>('products', ref =>
+  //             ref.where('uid', '==', user.uid).orderBy('priority')
+  //           )
+  //           .valueChanges({ idField: 'id' });
+  //       } else {
+  //         return [];
+  //       }
+  //     }),
+  //     // map(boards => boards.sort((a, b) => a.priority - b.priority))
+  //   );
+  // }
 
 
   updateProducts(product: Product) {

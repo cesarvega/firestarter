@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./shell.component.scss']
 })
 export class ShellComponent {
-
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
     .pipe(
       map(result => result.matches),
@@ -18,5 +18,5 @@ export class ShellComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, public afAuth: AngularFireAuth) {}
-
+  
 }

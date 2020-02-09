@@ -17,6 +17,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatBadgeModule} from '@angular/material/badge';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDialogModule} from '@angular/material/dialog';
 const components = [
   ShellComponent, DeleteButtonComponent
 ];
@@ -38,7 +40,9 @@ const modules = [
   MatSnackBarModule,
   FlexLayoutModule,
   MatExpansionModule,
-  MatBadgeModule
+  MatBadgeModule,
+  NgbModule,
+  MatDialogModule
 ];
 
 @NgModule({
