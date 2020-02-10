@@ -61,6 +61,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     let audio = new Audio();
     switch (butonName) {
+
+      case 'pop':
+        this.isPopVisible = !this.isPopVisible;
+        break;
+
       case 'heart':
         audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
         this.isPopVisible = !this.isPopVisible;
@@ -74,10 +79,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
       case 'price':
         audio.src = "assets/material_product_sounds/wav/04 Secondary System Sounds/alert_error-02.wav";
-        break;
-
-      case 'pop':
-        this.isPopVisible = !this.isPopVisible;
         break;
 
       case 'cigar':
