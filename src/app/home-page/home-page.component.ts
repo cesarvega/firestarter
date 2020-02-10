@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { BoardService } from '../kanban/board.service';
 import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
@@ -27,7 +28,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     { id: 4, name: 'Flash' }
   ];
   panelOpenState = false;
-  isDirty = false;
+  isPopVisible = false;
   whisMe = false;
   badgeNumber = 0;
   images: { "id": number; "url": string; }[];
@@ -42,11 +43,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
       );
 
 
-      this.images = [
-        {"id":1, "url":"assets/img/header.jpeg"},
-        {"id":2, "url":"assets/img/velo2.jpeg"},
-        {"id":3, "url":"assets/img/velo3.jpeg"},
-          ]
+    this.images = [
+      { "id": 1, "url": "assets/img/header.jpeg" },
+      { "id": 2, "url": "assets/img/velo2.jpeg" },
+      { "id": 3, "url": "assets/img/velo3.jpeg" },
+    ]
 
   }
 
@@ -60,25 +61,37 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     let audio = new Audio();
     switch (butonName) {
-      case 'heart':      
-      audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
-      this.whisMe = !this.whisMe;
-      break;
-      
-      case 'remove':      
-      this.badgeNumber = this.badgeNumber - 1 ;
-      break;
-      
+      case 'heart':
+        audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
+        this.isPopVisible = !this.isPopVisible;
+        this.whisMe = !this.whisMe;
+        break;
+
+      case 'remove':
+        audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-03.wav";
+        this.badgeNumber = this.badgeNumber - 1;
+        break;
+
+      case 'price':
+        audio.src = "assets/material_product_sounds/wav/04 Secondary System Sounds/alert_error-02.wav";
+        break;
+
+      case 'pop':
+        this.isPopVisible = !this.isPopVisible;
+        break;
+
+      case 'cigar':
+        audio.src = "assets/material_product_sounds/wav/04 Secondary System Sounds/alert_error-02.wav";
+        break;
+
       default:
-        audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/ui_lock.wav";
-        this.badgeNumber = this.badgeNumber + 1 ;
+        audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
+        this.badgeNumber = this.badgeNumber + 1;
         break;
     }
 
     audio.load();
     audio.play();
-   
-    this.isDirty = true;
   }
 
 }

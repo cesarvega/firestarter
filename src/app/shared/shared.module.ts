@@ -19,6 +19,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatBadgeModule} from '@angular/material/badge';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRippleModule} from '@angular/material/core';
 const components = [
   ShellComponent, DeleteButtonComponent
 ];
@@ -42,7 +43,8 @@ const modules = [
   MatExpansionModule,
   MatBadgeModule,
   NgbModule,
-  MatDialogModule
+  MatDialogModule,
+  MatRippleModule
 ];
 
 @NgModule({

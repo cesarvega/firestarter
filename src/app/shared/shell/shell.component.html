@@ -72,13 +72,13 @@
 
 
 <div class="row footer">
-  <div class="col-12" fxLayoutAlign="center center" style=" padding-left: 40px;">
+  <div class="col-12" fxLayoutAlign="center center" style=" padding-left: 30px;">
 
     <!-- <button mat-button class="" style="outline: none;">
       <span style="font-size: 35px; outline: none;font-family: hackers;color: white;background-color: black;">$</span>
 
     </button> -->
-    <div class="rounded-pill mat-elevation-z4 btn" style="background-color: black;
+    <div matRipple matRippleColor="rgba(255,255,255,.5)" class="rounded-pill mat-elevation-z4 btn" style="background-color: black;
      outline: none;
      font-family: hackers;
      text-align: center;
@@ -86,11 +86,15 @@
      border: 2px solid goldenrod;
      width: 110px;
      position: absolute;
-     bottom: 10px;
+     bottom: 10px;    overflow: auto;
 
     ">
-      <span style="font-family: hackers;font-size: 30;">YOU-PAY</span><br><span style="font-family: caviar;">$:13.22</span>
+      <span style="font-family: hackers;font-size: 25;">YOU-PAY</span><br>
+      <span style="font-size: 25px;
+      font-family: caviar;
+      font-family: hackers">$:0</span>
     </div>
+
   </div>
 
 </div>

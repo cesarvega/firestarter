@@ -17,6 +17,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     AngularFireAuthModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FlexLayoutModule,
+    MatRippleModule,
+    MatDialogModule,
     NgbModule
   ],
 
