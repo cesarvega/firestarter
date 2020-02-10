@@ -62,6 +62,7 @@ $firestarter-accent: mat-palette($mat-purple, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $firestarter-warn: mat-palette($mat-red);
 
+@import '~animate.css/animate.min';
 // Create the theme object (a Sass map containing all of the palettes).
 $firestarter-theme: mat-light-theme($firestarter-primary, $firestarter-accent, $firestarter-warn);
 
