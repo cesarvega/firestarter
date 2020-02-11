@@ -18,5 +18,15 @@ export class ShellComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, public afAuth: AngularFireAuth) {}
+
+  playCashRegister(){
+    
+    let audio = new Audio();
+    audio.src = "assets/material_product_sounds/mrvr/Cash Register Sound Effect.mp3";
+    audio.volume = 0.1;
+    audio.load();
+    audio.play();
+  
+  }
   
 }
