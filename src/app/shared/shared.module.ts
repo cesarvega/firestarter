@@ -57,6 +57,6 @@ const modules = [
   exports: [
     ...components,
     ...modules
-  ],
+  ]
 })
 export class SharedModule {}

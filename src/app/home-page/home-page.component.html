@@ -2,7 +2,7 @@
     <div class="row" >
 
         <!-- REPEAT -->
-        <div  class="col-sm-6" *ngFor="let product of products; let i = index " fxLayoutAlign="start center" (click)="playAmbientMusic()"
+        <div  class="col-sm-6" *ngFor="let product of products; let i = index " fxLayoutAlign="start center" (click)="openDialog(product)"
             style="background-color: white;padding: 10px;padding-left: 0px;">
             <div class="card mat-elevation-z4" style=" overflow: hidden; ">
                 <!-- <div style="font-family: mouse;font-size: 50px;">abcdefghjklaxbcnvm</div> -->
@@ -17,10 +17,8 @@
                             
                         </div>
                         <div class="col-3" style="position: absolute;right: 40px;top: 0;" >
-                            <button (click)="playAudio('price')" mat-stroked-button style="   float: right;
-                            margin-right: -60px;    position: absolute;
-    right: -40px;"
-                                style="font-family: caviar;outline: none;padding-top: 5px;">
+                            <button (click)="playAudio('price')" mat-stroked-button style="font-family: 
+                            caviar;outline: none;padding-top: 5px;">
                                 <span style="font-size: 28px; outline: none">$</span>
                                 <span  style="font-size: 25px; outline: none;font-family: caviar;">{{product.price}}</span>
 
@@ -40,11 +38,11 @@
 
                         </div>
 
-<!-- ************************************************************************************************************************ -->
+<!-- ***********************************************WORK AREA***************************************** -->
                         <div class="col-2">
                             <button class="mat-elevation-z4" mat-icon-button color="warn"
                                 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; outline: none;">
-                                <mat-icon class="box animated flip zoomIn  " style="font-size: 40px;" (click)="playAudio('heart'); " *ngIf="isPopVisible">
+                                <mat-icon class="boX" style="font-size: 40px;" (click)="playAudio('heart'); " *ngIf="isPopVisible">
                                     select_all</mat-icon>
                                 <mat-icon class="box animated lightSpeedIn " style="font-size: 26px;" (click)="playAudio('heart'); " *ngIf="!whisMe">
                                     favorite_border</mat-icon>

@@ -1,16 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
 import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
-
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-
   products: Product[];
   productSub: Subscription;
   playMusicOnce = true;
@@ -93,13 +95,17 @@ export class HomePageComponent implements OnInit, OnDestroy {
     { animationName: "rollIn" },
     { animationName: "rollOut" },
   ];
+  islogoWooble = false;
   panelOpenState = false;
   isPopVisible = false;
   whisMe = false;
   whisMeFilled = false;
   badgeNumber = 0;
   images: { "id": number; "url": string; }[];
-  constructor(public boardService: BoardService) { }
+
+  animal: string;
+  name: string;
+  constructor(public boardService: BoardService, public dialog: MatDialog) { }
   ngOnInit(): void {
 
     this.productSub = this.boardService.getUserProducts()
@@ -128,6 +134,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.play();
         this.playMusicOnce = false;
       }, 1000);
+     
+    
     }
 
 
@@ -198,6 +206,37 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
+
+
+  openDialog(product: Product): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      // width: '250px',
+      data: {name: product.name, animal: product.smallDescription}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
 }
 
 
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+  name: any;
+  animal: any;
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
