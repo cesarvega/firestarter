@@ -15,7 +15,7 @@ export interface DialogData {
 export class HomePageComponent implements OnInit, OnDestroy {
   products: Product[];
   productSub: Subscription;
-  playMusicOnce = true;
+  playMusicOnce = false;
   animations = [
     { animationName: "bounce" },
     { animationName: "flash" },
@@ -193,7 +193,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/04 Secondary System Sounds/alert_error-02.wav";
         audio.load();
         audio.play();
-        break;
+        break;  
 
       default:
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
