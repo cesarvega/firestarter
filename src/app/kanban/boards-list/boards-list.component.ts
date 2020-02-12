@@ -57,7 +57,12 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         this.boardService.createProduct({          
           name : 'product name',
           active : true,
-          description : 'string',
+          description : `Epic Cigars is proud to offer the Smoking Shields: a special limited release produced in honor 
+          of the non-profit organization of the same name, which raises money for law enforcement men and women and their families.
+          This medium to full-bodied Nicaraguan cigar consists of a dark and oily Brazilian maduro wrapper, Dominican binder,
+          and filler from both Nicaragua and Dominican Republic that comes together to provide delicious rich notes of espresso,
+          cocoa and leather. A portion of every sale goes towards supporting this worthy cause built around honoring those who keep us safe
+          smallDescription : 'Toro, Full, Maduro, from Dominican Republic`,
           cigarOrigin : 'string',
           strength : 'string',
           wrapperColor : 'string',
@@ -72,7 +77,7 @@ export class BoardsListComponent implements OnInit, OnDestroy {
           extraShippingFee : 10,
           price : 10,
           boxOf : 10,
-          boxOfPrice : 10,
+          boxOfPrice : 10.04,
           comparedPrice : 10,
           taxRate : 10,
           priceTaxExcl : 10,

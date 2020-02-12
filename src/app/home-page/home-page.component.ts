@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
 import { Board, Product } from '../kanban/board.model';
@@ -105,8 +106,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   animal: string;
   name: string;
-  constructor(public boardService: BoardService, public dialog: MatDialog) { }
+  constructor(public boardService: BoardService, public dialog: MatDialog, private scrollDispatcher: ScrollDispatcher) { }
   ngOnInit(): void {
+
+
+    this.scrollDispatcher.scrolled().subscribe(x => {
+      console.log('I am scrolling')
+    });
 
     this.productSub = this.boardService.getUserProducts()
       .subscribe(products => {
@@ -222,15 +228,17 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 }
 
-
+  
 
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
+  styleUrls: ['./home-page.component.scss']
 })
 export class DialogOverviewExampleDialog {
   name: any;
   animal: any;
+  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
