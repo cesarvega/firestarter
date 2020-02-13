@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-app-gallery',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppGalleryComponent implements OnInit {
 
+  scrollFromTop: number;
   images: any = [
     'assets/images/slide1.jpg',
     'assets/images/slide2.jpg',
@@ -24,14 +25,20 @@ export class AppGalleryComponent implements OnInit {
     items:1,
     dots: true,
     autoplay: 10000,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: false,
+    autoplayTimeout: 15000,
+    autoplayHoverPause: true,
     navigation: false,
     responsiveClass:true,
   };
 
   constructor() { }
-
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+    let x  = window.scrollX;
+    this.scrollFromTop  = window.scrollY;
+    console.log(x + ':' + this.scrollFromTop);
+    
+  }
   ngOnInit() {
   }
 

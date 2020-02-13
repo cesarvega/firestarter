@@ -6,6 +6,8 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AppGalleryComponent } from './app-gallery/app-gallery.component';
 import { TraxComponent } from './trax/trax.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { GridComponent } from './grid/grid.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'trax',
     component: TraxComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
+  },
+  {
+    path: 'grid',
+    component: GridComponent
   },
   {
     path: 'apps',

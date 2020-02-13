@@ -4,6 +4,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { BoardService } from '../kanban/board.service';
 import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
+
+import * as AOS from 'aos';
+
 export interface DialogData {
   animal: string;
   name: string;
@@ -109,7 +112,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(public boardService: BoardService, public dialog: MatDialog, private scrollDispatcher: ScrollDispatcher) { }
   ngOnInit(): void {
 
-
+  
+    AOS.init();
     this.scrollDispatcher.scrolled().subscribe(x => {
       console.log('I am scrolling')
     });
@@ -216,7 +220,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   openDialog(product: Product): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      // width: '250px',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '98%',
+      width: '98%',
       data: {name: product.name, animal: product.smallDescription}
     });
 
@@ -228,12 +235,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 }
 
-  
+
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-  styleUrls: ['./home-page.component.scss']
+  templateUrl: 'detail-page.html',
+  styleUrls: ['detail-page.scss']
 })
 export class DialogOverviewExampleDialog {
   name: any;
@@ -244,6 +251,7 @@ export class DialogOverviewExampleDialog {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
+    
     this.dialogRef.close();
   }
 

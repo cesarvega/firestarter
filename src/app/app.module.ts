@@ -25,6 +25,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { AppGalleryComponent } from './app-gallery/app-gallery.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { TraxComponent } from './trax/trax.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { GridComponent } from './grid/grid.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { TraxComponent } from './trax/trax.component';
     DetailPageComponent,
     GalleryComponent,
     AppGalleryComponent,
-    TraxComponent
+    TraxComponent,
+    CheckoutComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,
