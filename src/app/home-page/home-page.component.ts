@@ -219,13 +219,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
 
-  openDialog(product: Product): void {
+  openDialog(product: Product, index :number): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '98%',
       width: '98%',
-      data: {name: product.name, desc: product.smallDescription}
+      data: {name: product.name, desc: product.smallDescription, index}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -245,16 +245,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
 })
 export class DialogOverviewExampleDialog implements OnInit{
   name: any;
+  indexImage = 'assets/images/cigars/601_3.png'
   animal: any;
   items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
-  desc: string;
+  desc: any;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
 
       this.name =this.data.name;
-      this.desc =this.data.desc;
+      this.desc = this.data.desc;
+      this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
       console.log('data', this.data);
 
     }

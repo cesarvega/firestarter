@@ -2,7 +2,7 @@
     <div class="product_item animated bounce" style=" animation-delay: 2000s;">
         <div id="productData" class="product_parent_img"
             style="position: relative; width: 51.46%; padding-bottom: 7.04%;">
-            <img alt="American Stogies Connecticut Torpedo 6 1/4 * 54" src="assets/images/cigars/601_3.png"
+            <img alt="American Stogies Connecticut Torpedo 6 1/4 * 54" [src]="indexImage"
                 title="American Stogies Connecticut Torpedo 6 1/4 * 54" class="lazy av_img_single img_withImage"
                 width="100%" height="100%" style="position: absolute;
                 width: 544px !important;
@@ -33,14 +33,13 @@
                         <div class="color_bar" style="width:64%"></div>
                         <div class="empty_bar" style="width:36%"></div>
                     </div>
-                    <div style="display:inline-block;vertical-align:top;font-size:14px;cursor:default;color:#b3b3b3;padding-left:5px;padding-top:1px;"
-                        title="3"><span>(3)</span></div>
+                    <div style="display:block;">{{desc}}</div>
                 </div>
             </span></div>
-        <div style="display:block;">{{desc}}</div>
+       
         <div class="pr_table_parent" (click)="onNoClick()">
             <div></div>
-            <table class="product_table" id="product_table" style="margin: -37px 0 0 67px;">
+            <table class="product_table" id="product_table" style="margin: -12px 0 0 67px;">
                 <tbody>
                     <tr class="av_details">
                         <th style="border-style:none;">&nbsp;</th>
