@@ -6,6 +6,7 @@ import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
 
 import * as AOS from 'aos';
+import { ActivatedRoute } from '@angular/router';
 
 export interface DialogData {
   animal: string;
@@ -224,7 +225,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       maxHeight: '100vh',
       height: '98%',
       width: '98%',
-      data: {name: product.name, animal: product.smallDescription}
+      data: {name: product.name, desc: product.smallDescription}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -238,17 +239,30 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
+  selector: 'app-detail',
   templateUrl: 'detail-page.html',
   styleUrls: ['detail-page.scss']
 })
-export class DialogOverviewExampleDialog {
+export class DialogOverviewExampleDialog implements OnInit{
   name: any;
   animal: any;
   items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+  desc: string;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+
+      this.name =this.data.name;
+      this.desc =this.data.desc;
+      console.log('data', this.data);
+
+    }
+
+    ngOnInit(): void {
+    
+
+    }
 
   onNoClick(): void {
     
