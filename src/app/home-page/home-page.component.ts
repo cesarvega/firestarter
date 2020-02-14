@@ -6,7 +6,7 @@ import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
 
 import * as AOS from 'aos';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 export interface DialogData {
   animal: string;
@@ -248,8 +248,10 @@ export class DialogOverviewExampleDialog implements OnInit{
   indexImage = 'assets/images/cigars/601_3.png'
   animal: any;
   items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
-  desc: any;
-  constructor(
+  desc: any; private lastPoppedUrl: string;
+  private yScrollStack: number[] = [];
+  location: any;
+  constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -258,14 +260,43 @@ export class DialogOverviewExampleDialog implements OnInit{
       this.desc = this.data.desc;
       this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
       console.log('data', this.data);
+      window.scroll({
+        top: 0, 
+        left: 0, 
+        behavior: 'smooth'
+      });
 
     }
 
     ngOnInit(): void {
-    
-
+      this.location.subscribe((ev:any) => {
+        this.lastPoppedUrl = ev.url;
+    });
+      this.router.events.subscribe((ev:any) => {
+        if (ev instanceof NavigationStart) {
+            if (ev.url != this.lastPoppedUrl)
+                this.yScrollStack.push(window.scrollY);
+        } else if (ev instanceof NavigationEnd) {
+            if (ev.url == this.lastPoppedUrl) {
+                this.lastPoppedUrl = undefined;
+                window.scrollTo(0, this.yScrollStack.pop());
+            } else
+                window.scrollTo(0, 0);
+        }
+    });
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+    });
     }
-
+    ngAfterContentInit(){
+      window.scroll({
+        top: 0, 
+        left: 0, 
+        behavior: 'smooth'
+      });
+    }
   onNoClick(): void {
     
     this.dialogRef.close();
