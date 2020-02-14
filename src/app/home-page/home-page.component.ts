@@ -223,6 +223,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       maxHeight: '100vh',
       height: '95%',
       width: '98%',
+      autoFocus: false,
       data: {name: product.name, desc: product.smallDescription, index}
     });
 
@@ -241,7 +242,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   templateUrl: 'detail-page.html',
   styleUrls: ['detail-page.scss']
 })
-export class DialogOverviewExampleDialog implements OnInit{
+export class DialogOverviewExampleDialog {
   name: any;
   indexImage = 'assets/images/cigars/601_3.png'
   animal: any;
@@ -252,47 +253,12 @@ export class DialogOverviewExampleDialog implements OnInit{
   constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
-
       this.name =this.data.name;
       this.desc = this.data.desc;
-      this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
-      console.log('data', this.data);
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
-
+      this.indexImage = 'assets/images/cigars/601_' + this.data.index%2 + '.png';
+   
     }
 
-    ngOnInit(): void {
-     
-      this.router.events.subscribe((ev:any) => {
-        if (ev instanceof NavigationStart) {
-            if (ev.url != this.lastPoppedUrl)
-                this.yScrollStack.push(window.scrollY);
-        } else if (ev instanceof NavigationEnd) {
-            if (ev.url == this.lastPoppedUrl) {
-                this.lastPoppedUrl = undefined;
-                window.scrollTo(0, this.yScrollStack.pop());
-            } else
-                window.scrollTo(0, 0);
-        }
-    });
-    window.scroll({
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth'
-    });
-    }
-    ngAfterContentInit(){
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
-    }
   onNoClick(): void {
     
     this.dialogRef.close();
