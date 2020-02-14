@@ -38,7 +38,8 @@ import { GridComponent } from './grid/grid.component';
     AppGalleryComponent,
     TraxComponent,
     CheckoutComponent,
-    GridComponent
+    GridComponent,
+  
   ],
   imports: [
     BrowserModule,
