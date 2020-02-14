@@ -1,21 +1,10 @@
-<div fxLayout="row" class="animated rubberBand" fxLayoutAlign="center center" style="background-color: black;"
-  *ngIf="islogoWooble">
-  <!-- <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span>
-  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span>
-  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span> -->
-  <!-- <span routerLink="/"><img src="assets/images/logos/bi-logo-with-tagline.svg" class="logo" alt=""></span>  -->
-  <span routerLink="/login"><img src="assets/images/cigars/cigarTotalLabel.png" class="logo " alt="Absolute"></span>
-  <!-- < span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span>
-  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span>
-  <span *ngIf="!(isHandset$ | async)" routerLink="/"><img src="assets/images/cigars/sides.png" class="logo"
-      alt=""></span> -->
+<div fxLayout="row" class="animated rubberBand" fxLayoutAlign="center center" 
+style="background-color: black;" *ngIf="islogoWooble">
+  <span   routerLink="/detail"><img src="assets/images/cigars/cigarTotalLabel.png" 
+    class="logo " alt="Absolute"></span>
+
 </div>
-<br>
+
 <div fxLayoutAlign="center center" style="background-color: #e9ecef;">
   <ngb-carousel *ngIf="images && !(isHandset$ | async)">
     <ng-template ngbSlide>

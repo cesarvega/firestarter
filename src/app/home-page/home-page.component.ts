@@ -1,8 +1,13 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
 import { Board, Product } from '../kanban/board.model';
 import { Subscription } from 'rxjs';
+
+import * as AOS from 'aos';
+import { ActivatedRoute } from '@angular/router';
+
 export interface DialogData {
   animal: string;
   name: string;
@@ -105,8 +110,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   animal: string;
   name: string;
-  constructor(public boardService: BoardService, public dialog: MatDialog) { }
+  constructor(public boardService: BoardService, public dialog: MatDialog, private scrollDispatcher: ScrollDispatcher) { }
   ngOnInit(): void {
+
+  
+    AOS.init();
+    this.scrollDispatcher.scrolled().subscribe(x => {
+      console.log('I am scrolling')
+    });
 
     this.productSub = this.boardService.getUserProducts()
       .subscribe(products => {
@@ -208,10 +219,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
 
-  openDialog(product: Product): void {
+  openDialog(product: Product, index :number): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      // width: '250px',
-      data: {name: product.name, animal: product.smallDescription}
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '98%',
+      width: '98%',
+      data: {name: product.name, desc: product.smallDescription, index}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -225,17 +239,35 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
+  selector: 'app-detail',
+  templateUrl: 'detail-page.html',
+  styleUrls: ['detail-page.scss']
 })
-export class DialogOverviewExampleDialog {
+export class DialogOverviewExampleDialog implements OnInit{
   name: any;
+  indexImage = 'assets/images/cigars/601_3.png'
   animal: any;
+  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+  desc: any;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+
+
+      this.name =this.data.name;
+      this.desc = this.data.desc;
+      this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
+      console.log('data', this.data);
+
+    }
+
+    ngOnInit(): void {
+    
+
+    }
 
   onNoClick(): void {
+    
     this.dialogRef.close();
   }
 

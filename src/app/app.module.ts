@@ -20,12 +20,25 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { DetailPageComponent } from './detail-page/detail-page.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { AppGalleryComponent } from './app-gallery/app-gallery.component';
+import { OwlModule } from 'ngx-owl-carousel';
+import { TraxComponent } from './trax/trax.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { GridComponent } from './grid/grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    DetailPageComponent,
+    GalleryComponent,
+    AppGalleryComponent,
+    TraxComponent,
+    CheckoutComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,
@@ -36,13 +49,14 @@ import { FormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FlexLayoutModule,
     MatRippleModule,
     MatDialogModule,
     ScrollingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    OwlModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [DialogOverviewExampleDialog],
 

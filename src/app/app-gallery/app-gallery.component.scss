@@ -1,0 +1,325 @@
+@import '../../assets/scss/lib.scss';
+
+aside.mobileSec {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 340px;
+    height: 680px;
+    border-radius: 10px;
+    border: #2B2B2B solid 4px;
+    -webkit-box-shadow: 0 2px 20px 3px #A8A8A8;
+    box-shadow: 0 2px 20px 3px #A8A8A8;
+    @include sm {
+        height: 690px;
+    }
+}
+
+div.scanTab img {
+    width: 100px;
+}
+
+div.scanTab a {
+    width: 120px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #2b2b2b;
+    transition: 0.2s all linear;
+    text-decoration: none;
+}
+
+div.scanTab a:hover { color: #ff6f00; }
+
+div.scanTab a img { width: 80px; margin-bottom: 8px; }
+
+a.btn {
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: 0.2s all linear;
+}
+
+a.btn:hover { background-color: #FF6F00; }
+
+header nav#logMenu a,
+header nav#dropMenu a {
+    margin-right: 25px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #2B2B2B;
+}
+
+header nav#logMenu a:last-child,
+header nav#dropMenu a:last-child { margin-right: 0; }
+
+header nav#logMenu a:hover,
+header nav#dropMenu a:hover { text-decoration: underline; }
+
+header nav#logMenu a#search,
+header nav#logMenu a#like,
+header nav#logMenu a#cart {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header nav#logMenu a#search { background-image: url('src/assets/icons/search.svg'); }
+
+header nav#logMenu a#like { background-image: url('src/assets/icons/heart.svg'); }
+
+header nav#logMenu a#cart { background-image: url('src/assets/icons/bag.svg'); }
+
+header a#logo {
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('src/assets/images/maxartkiller.png');
+}
+
+
+section#goMobile article {
+    width: 100%;
+    max-width: 550px;
+}
+
+section#goMobile article h1 {
+    font-weight: 800;
+    font-size: 40px;
+    color: #2b2b2b;
+    @include md {
+        font-size: 60px;
+    }
+}
+
+section#goMobile article p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #898989;
+    margin-bottom: 20px;
+}
+
+section#infoSec {
+    text-align: center;
+}
+
+section#infoSec a#bigLogo {
+    display: inline-block;
+    width: 300px;
+    height: 80px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url('src/assets/images/logo-mobileux-1.png');
+}
+
+section#infoSec article.sideSec {
+    width: 100%;
+    max-width: 350px;
+}
+
+section#infoSec article h2 { color: #274EBB; }
+
+
+section#infoSec article#mobileInfo {
+    margin: 80px auto;
+    width: 100%;
+    max-width: 750px;
+}
+
+section#infoSec article#mobileInfo p {
+    text-align: left;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+section#infoSec div#frameworkSec aside.mobileSec { margin: 0 auto; }
+
+section#infoSec div#frameworkSec h3 { margin-top: 40px; }
+
+section#infoSec div#frameworkSec h3.red { color: #C23332; }
+
+section#infoSec div#frameworkSec h3.blue { color: #1D78AA; }
+
+section#infoSec div#frameworkSec p { color: #898989; }
+
+section#scanBar { padding: 30px 0; }
+
+section#scanBar div.row {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section#kitInfo {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+section#kitInfo h2 {
+    color: #C23332;
+    margin-top: 30px;
+}
+
+section#kitInfo p { color: #898989; }
+
+section#kitInfo div.scanTab {
+    width: 100%;
+    max-width: 500px;
+    margin: 80px auto;
+}
+
+section#kitInfo img.bigImg {
+    width: 100%;
+    max-width: 800px;
+}
+
+section#designSec {
+    background-color: #F4D9E1;
+}
+
+section#quickShare article,
+section#moreFeature article,
+section#designSec article {
+    width: 100%;
+    max-width: 450px;
+}
+
+section#quickShare article h2,
+section#moreFeature article h2,
+section#designSec article h2 {
+    font-weight: normal;
+    font-size: 35px;
+}
+
+section#quickShare article h4,
+section#moreFeature article h4,
+section#designSec article h4 {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+section#quickShare article p,
+section#moreFeature article p,
+section#designSec article p {
+    color: #898989;
+    font-size: 15px;
+}
+
+section#quickShare img,
+section#moreFeature img,
+section#designSec img { width: 300px; }
+
+
+section#moreDeme {
+    text-align: center;
+}
+
+section#moreDeme h2 { font-size: 40px; }
+
+section#moreDeme h3 { font-size: 30px; }
+
+section#moreDeme p {
+    font-size: 18px;
+}
+
+section#moreDeme article {
+    width: 100%;
+    max-width: 400px;
+}
+
+section#tabResponsive {
+    text-align: center;
+}
+
+section#tabResponsive div.scanTab,
+section#tabResponsive aside.mobileSec {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+section#tabResponsive div.scanTab { max-width: 300px; }
+
+section#tabResponsive aside.mobileSec {
+    height: 200px;
+    @include sm {
+        height: 500px;
+    }
+    @include md {
+        height: 500px;
+    }
+}
+
+footer {
+    background-color: #F5F5F5;
+}
+
+footer h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #898989;
+}
+
+footer a {
+    display: inline-block;
+    width: 100%;
+    margin: 3px 0;
+    font-size: 13px;
+    color: #181818;
+}
+
+footer a.facebook,
+footer a.twitter,
+footer a.instagram,
+footer a.contact {
+    width: 20px;
+    height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 8px;
+}
+
+footer a.facebook { background-image: url('src/assets/icons/facebook.svg'); }
+footer a.twitter { background-image: url('src/assets/icons/twitter.svg'); }
+footer a.instagram { background-image: url('src/assets/icons/instagram.svg'); }
+footer a.contact { background-image: url('src/assets/icons/at.svg'); }
+
+footer form {
+    border-bottom: #898989 solid 2px;
+    padding-bottom: 5px;
+}
+
+footer form input[type=text] {
+    width: calc(100% - 25px);
+    border: none;
+    background-color: transparent;
+}
+
+footer form button[type=submit] {
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('src/assets/icons/search.svg');
+}
+
+footer div#copyRight {
+    font-size: 12px;
+    color: #2b2b2b;
+}
