@@ -5092,7 +5092,7 @@ input.sc_checkout_edit_col_items input:-ms-input-placeholder { /* Internet Explo
     min-height: 20px;
     border-top: 1px dotted #b3b3b3;
     font-weight: bold;
-    color: #b3b3b3;
+    color: #000000;
     padding-top: 5px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -5111,7 +5111,7 @@ input.sc_checkout_edit_col_items input:-ms-input-placeholder { /* Internet Explo
 
 .pr_pItem > div:first-child {
     font-weight: bold;
-    color: #b3b3b3;
+    color: #000000;
     padding-top: 2px;
     display: block;
     letter-spacing: 1px;
@@ -5120,12 +5120,13 @@ input.sc_checkout_edit_col_items input:-ms-input-placeholder { /* Internet Explo
     float: left;
     font-weight: normal;
     font-size: 14px;
+    font-family: caviar;
 }
 
 .pr_pItem > div {
     font-weight: 500;
     display: block;
-    color: #cd9939;
+    color: #05a354;
     font-size: 16px;
     text-transform: capitalize;
 }

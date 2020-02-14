@@ -44,6 +44,10 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
+    path: 'tu',
+    loadChildren: () => import('./tutorials/tutorials.module').then(m => m.TutorialsModule)
+  },
+  {
     path: 'kanban',
     loadChildren: () =>
       import('./kanban/kanban.module').then(m => m.KanbanModule),

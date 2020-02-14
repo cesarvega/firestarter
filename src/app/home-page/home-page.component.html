@@ -11,7 +11,7 @@
     <div class="row" >
 
         <!-- REPEAT -->
-        <div  class="col-sm-6 animated slideInUp" (click)="openDialog(product, i)"  *ngFor="let product of products; let i = index " fxLayoutAlign="start center" 
+        <div  class="col-sm-6 animated slideInUp"  *ngFor="let product of products; let i = index " fxLayoutAlign="start center" 
             style="background-color: white;padding: 10px;padding-left: 0px;">
             <div  style=" overflow: hidden;" class="card mat-elevation-z4 animated {{ i%2===0 ? 'slideInLeft' : 'slideInRight'}}"> 
                 <!-- <div style="font-family: mouse;font-size: 50px;">abcdefghjklaxbcnvm</div> -->
@@ -39,7 +39,7 @@
                     </div>
                     <div class="row" >
                         <div  class="col-4" >
-                            <img class="mat-elevation-z4" mat-card-image src="assets/images/cigars/601_{{i%4}}.png"
+                            <img class="mat-elevation-z4" mat-card-image src="assets/images/cigars/601_{{i%4}}.png" (click)="openDialog(product, i)"
                                 style="width: 300px;margin-left: -141.1px; border-bottom-right-radius: 25px;border-top-right-radius: 25px;   padding-top: 0px;"
                                 alt="product.name">
                         </div>
@@ -50,12 +50,12 @@
 <!-- ***********************************************WORK AREA***************************************** -->
                         <div class="col-2">
                             <button class="mat-elevation-z4" mat-icon-button color="warn"
-                                style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; outline: none;">
+                                style="outline: none;">
                                 <!-- <mat-icon class="boX" style="font-size: 40px;" (click)="playAudio('heart'); " *ngIf="isPopVisible">
                                     select_all</mat-icon> -->
-                                <mat-icon class="box animated lightSpeedIn " style="font-size: 26px;" (click)="playAudio('heart'); " *ngIf="!whisMe">
+                                <mat-icon class="box animated tada " style="font-size: 26px; animation-timing-function: ease-in;" (click)="playAudio('heart'); " *ngIf="!whisMe">
                                     favorite_border</mat-icon>
-                                <mat-icon class="box animated flip " style="font-size: 26px;" (click)="playAudio('heart')" *ngIf="whisMeFilled">favorite
+                                <mat-icon class="box animated  flip" style="font-size: 26px;" (click)="playAudio('heart')" *ngIf="whisMeFilled">favorite
                                 </mat-icon>
                             </button>
                         </div>

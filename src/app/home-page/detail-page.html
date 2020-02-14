@@ -1,14 +1,20 @@
-<div class="animated bounce" style=" animation-delay: 2000s;">
-    <div class="product_item animated bounce" style=" animation-delay: 2000s;">
+<div class="animated bounce" style=" animation-delay: 200ms;">
+    <div class="product_item">
+        <img style="vertical-align: middle;
+        position: absolute;
+        border-style: none;
+        right: -20px;
+        top: 0;
+        width: 131px;
+        filter: invert(100%);" src="assets/images/cigars/cigarTotalLabel.png" class="logo " alt="Absolute">
         <div id="productData" class="product_parent_img"
             style="position: relative; width: 51.46%; padding-bottom: 7.04%;">
-            <img alt="American Stogies Connecticut Torpedo 6 1/4 * 54" [src]="indexImage"
-                title="American Stogies Connecticut Torpedo 6 1/4 * 54" class="lazy av_img_single img_withImage"
-                width="100%" height="100%" style="position: absolute;
-                width: 544px !important;
+            <img alt="{{name}}" [src]="indexImage" title="{{name}}"
+                class="mat-elevation-z4 lazy av_img_single img_withImage" width="100%" height="100%" style="position: absolute;
+                width: 525px !important;
                 height: auto !important;
                 position: relative !important;
-                margin: 0 0 0 -20px;
+                margin: 0 0 0 -16px;
                 display: block !important;
                 transform-origin: 0% 0%;
                 max-width: none;
@@ -19,27 +25,28 @@
                 -o-transform: rotate(-90deg) translateX(-100%);
                 -ms-transform-origin: 0% 0%;
                 -moz-transform-origin: 0% 0%;
-                -webkit-transform-origin: 0% 0%;
+                -webkit-transform-origin: 0% 0%;                
+                border-radius: 27px;
             "> </div>
         <div class="product_primary_info" style="padding-left: 90px;"><span style="display:inline;margin-right:40px;">
-        <h1 style="vertical-align: middle;text-decoration: none"><span itemprop="name">{{name}}</span></h1>
-                <meta itemprop="sku" content="10043242">
-                <meta itemprop="url"
-                    content="https://www.neptunecigar.com%2fcigars%2famerican-stogies-connecticut-torpedo">
+                <h1 style="font-family: black-list; vertical-align: middle;text-decoration: none;     
+        font-size: -webkit-xxx-large;
+        width: 250px;"><span itemprop="name">{{name}}</span></h1>
             </span><span style="display:inline-block;margin-left:-5px;">
                 <div style="display:inline-block;vertical-align:middle;">
                     <div class="average_rating pr_ratingStars parent_star" title="3.20"></div>
                     <div class="average_rating pr_ratingStars">
-                        <div class="color_bar" style="width:64%"></div>
-                        <div class="empty_bar" style="width:36%"></div>
+                        <div class="color_bar" style="width:84%"></div>
+                        <div class="empty_bar" style="width:16%"></div>
                     </div>
-                    <div style="display:block;">{{desc}}</div>
+                    <!-- <div style="font-family: caviar; display:block;">4.0</div> -->
+                    <div style="font-family: caviar; display:block;">{{desc}}</div>
                 </div>
             </span></div>
-       
-        <div class="pr_table_parent" (click)="onNoClick()">
+
+        <div class="pr_table_parent">
             <div></div>
-            <table class="product_table" id="product_table" style="margin: -1px 0 0 40px;">
+            <table class="product_table" id="product_table" style="margin: -1px 0 0 49px;">
                 <tbody>
                     <tr class="av_details">
                         <th style="border-style:none;">&nbsp;</th>
@@ -52,7 +59,9 @@
                         <th style="border-style:none;">&nbsp;</th>
                     </tr>
                     <tr align="center">
-                        <td class="product_table_cells lbup" align="left">Box of 25</td>
+                        <td class="product_table_cells lbup" align="left">
+                            <h3 style="color: goldenrod !important;  -webkit-text-stroke: 0.5px black;"> Box of 25</h3>
+                        </td>
                         <td class="product_table_cells"><span class="pr_InfoDetails">MSRP: </span>$172.50</td>
                         <td class="product_table_cells important_price highlightedInfo"><span
                                 style="color:#666666;text-decoration: line-through;font-size:14px;">$162.95</span><br><strong
@@ -106,7 +115,9 @@
 
                     </tr>
                     <tr align="center">
-                        <td class="product_table_cells lbup" align="left">Single</td>
+                        <td class="product_table_cells lbup" align="left">
+                            <h3 style="color: goldenrod !important;  -webkit-text-stroke: 0.5px black;">Single</h3>
+                        </td>
                         <td class="product_table_cells"><span class="pr_InfoDetails">MSRP: </span>$6.90</td>
                         <td class="product_table_cells important_price highlightedInfo"><span
                                 style="color:#666666;text-decoration: line-through;font-size:14px;">$6.55</span><br><strong
@@ -163,8 +174,9 @@
             </table>
         </div>
     </div>
-    <div id="pr_tabSpec " (click)="onNoClick()" style="padding-top: 90px;">
-        <div class="pr_divTitle"><span class="pr_spanTitle">Specifications</span></div>
+    <div id="pr_tabSpec " style="padding-top: 90px;">
+        <div class="pr_divTitle"><span style="font-family: Caviar; color: black;"
+                class="pr_spanTitle">Specifications</span></div>
         <div class="pr_divContent pr_enhanced">
             <ul class="pr_specList">
                 <li class="pr_pItem">
@@ -331,7 +343,7 @@
                     <div>
                         <div style="margin-left:43%;" onclick="showMoreInfo(this);" class="onHover">Honduras<i
                                 class="fa fa-question-circle"></i></div>
-                        <div  style="display:none;" class="pr_SpecDesc">Filler is the term used to
+                        <div style="display:none;" class="pr_SpecDesc">Filler is the term used to
                             describe the tobacco
                             inside a cigar or the "guts" of the cigar.</div>
                         <div>
@@ -344,14 +356,15 @@
                     </div>
                 </li>
             </ul>
-            <button id="btn309989" class="pr_ddBtn" onclick="addToCart(this, 309989);return false;"
-                style="float: right;" data-orig="Add to Cart"><span class="btnText btnAddToCart"><i
-                        class="fa fa-shopping-cart"><span>+</span></i>Add to
-                    Cart</span></button>
-            <button id="btn309989" class="pr_ddBtn" onclick="addToCart(this, 309989);return false;"
+            <button style="background-color: black; border: 1px solid goldenrod;
+            float: right;" id="btn309989" class="pr_ddBtn" onclick="addToCart(this, 309989);return false;"
                 data-orig="Add to Cart"><span class="btnText btnAddToCart"><i
                         class="fa fa-shopping-cart"><span>+</span></i>Add to
                     Cart</span></button>
+            <button style="background-color: black; border: 1px solid goldenrod; float: right;margin-right: 10px;
+            " (click)="onNoClick()" id="btn309989" class="pr_ddBtn"
+                onclick="addToCart(this, 309989);return false;" data-orig="Add to Cart"><span
+                    class="btnText btnAddToCart"><i class="fa fa-shopping-cart"><span>+</span></i>close</span></button>
 
         </div>
     </div>

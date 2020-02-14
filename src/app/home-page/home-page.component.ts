@@ -165,17 +165,15 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
       case 'heart':
         // audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
-        audio.src = "assets/material_product_sounds/mrvr/pufff.wav";
-        this.whisMe = !this.whisMe;
-        this.isPopVisible = !this.isPopVisible;
 
-        setTimeout(() => {
-          this.isPopVisible = !this.isPopVisible;
-          this.whisMeFilled = !this.whisMeFilled;
-          setTimeout(() => {
+        audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_simple-01.wav";
+        if(this.whisMe){
+          
+          audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_high-intensity.wav";
+        }
 
-          }, 1000);
-        }, 900);
+        this.whisMe = !this.whisMeFilled;
+        this.whisMeFilled = this.whisMe;
 
         audio.load();
         audio.play();
@@ -223,7 +221,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       maxWidth: '100vw',
       maxHeight: '100vh',
-      height: '98%',
+      height: '95%',
       width: '98%',
       data: {name: product.name, desc: product.smallDescription, index}
     });
@@ -269,9 +267,7 @@ export class DialogOverviewExampleDialog implements OnInit{
     }
 
     ngOnInit(): void {
-      this.location.subscribe((ev:any) => {
-        this.lastPoppedUrl = ev.url;
-    });
+     
       this.router.events.subscribe((ev:any) => {
         if (ev instanceof NavigationStart) {
             if (ev.url != this.lastPoppedUrl)
