@@ -11,7 +11,7 @@
     <div class="row" >
 
         <!-- REPEAT -->
-        <div  class="col-sm-6 animated slideInUp"  *ngFor="let product of products; let i = index " fxLayoutAlign="start center" 
+        <div  class="col-sm-6 animated slideInUp"  *ngFor="let product of productList | async ; let i = index " fxLayoutAlign="start center" 
             style="background-color: white;padding: 10px;padding-left: 0px;">
             <div  style=" overflow: hidden;" class="card mat-elevation-z4 animated {{ i%2===0 ? 'slideInLeft' : 'slideInRight'}}"> 
                 <!-- <div style="font-family: mouse;font-size: 50px;">abcdefghjklaxbcnvm</div> -->
@@ -22,7 +22,7 @@
                             </h6>
                          
                                 <p class="card-text" style="font-family: caviar; font-size: small;">
-                                    <strong>{{product.smallDescription}}</strong></p>
+                                    <strong>{{product.smallDescription || "name subcateory"}}</strong></p>
                             
                         </div>
                         <div class="col-3" style="position: absolute;right: 40px;top: 0;" >
@@ -53,9 +53,10 @@
                                 style="outline: none;">
                                 <!-- <mat-icon class="boX" style="font-size: 40px;" (click)="playAudio('heart'); " *ngIf="isPopVisible">
                                     select_all</mat-icon> -->
-                                <mat-icon class="box animated tada " style="font-size: 26px; animation-timing-function: ease-in;" (click)="playAudio('heart'); " *ngIf="!whisMe">
+                                <mat-icon class="box animated tada " style="font-size: 26px; animation-timing-function: ease-in;" 
+                                (click)="playAudio('heart', product); " *ngIf="!product.like">
                                     favorite_border</mat-icon>
-                                <mat-icon class="box animated  flip" style="font-size: 26px;" (click)="playAudio('heart')" *ngIf="whisMeFilled">favorite
+                                <mat-icon class="box animated  flip" style="font-size: 26px;" (click)="playAudio('heart', product)" *ngIf="product.like">favorite
                                 </mat-icon>
                             </button>
                         </div>
@@ -64,22 +65,21 @@
                             <button
                                 style="outline: none;"
                                 isRoundButton="true" mat-icon-button>
-                                <div [ngClass]="(badgeNumber <= 100) ? 'css-class-1' : 'css-class-2'"
-                                    class="rounded-circle mat-elevation-z4 box rotate" *ngIf="badgeNumber!==0" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                                <div [ngClass]="(product.badgeNumber <= 100) ? 'css-class-1' : 'css-class-2'"
+                                    class="rounded-circle mat-elevation-z4 box rotate" *ngIf="product.badgeNumber!==0" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
                                 background-color: black; outline: none;font-family: hackers;
-                                color: white;border: 2px solid goldenrod;" (click)="playAudio('shopping')">
-                                    {{badgeNumber}}</div>
-                                <button class="mat-elevation-z4" *ngIf="badgeNumber===0" mat-icon-button color="black"
+                                color: white;border: 2px solid goldenrod;" (click)="playAudio('shopping', product);" >
+                                    {{product.badgeNumber}}</div>
+                                <button class="mat-elevation-z4" *ngIf="product.badgeNumber===0" mat-icon-button color="black"
                                     style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; outline: none;text-align: center;">
-                                    <mat-icon style="font-size: 26px;" (click)="playAudio('shopping'); "
-                                        *ngIf="badgeNumber===0">shopping_basket</mat-icon>
+                                    <mat-icon style="font-size: 26px;" (click)="playAudio('shopping', product);" >shopping_basket</mat-icon>
                                 </button>
                             </button>
 
                         </div>
                         <div class="col-2">
-                            <button mat-icon-button [disabled]="(badgeNumber <= 0)" style=" outline: none;font-family: hackers;    font-size: 60px;"
-                                class="mat-elevation-z4"  (click)="playAudio('remove');">
+                            <button mat-icon-button [disabled]="(product.badgeNumber <= 0)" style=" outline: none;font-family: hackers;    font-size: 60px;"
+                                class="mat-elevation-z4"  (click)="playAudio('remove', product, i);" >
                                 -
                             </button>
                         </div>

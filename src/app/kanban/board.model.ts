@@ -11,12 +11,16 @@ export interface Task {
 }
 
 export interface Product {
-  id?: string;
+  uid?: string;
   name?: string;
   active?: boolean;
   description?: string;
   smallDescription?: string;
+  badgeNumber?: number;
+  like?: boolean;
   cigarOrigin?: string;
+  cigarShape?: string;
+  brands?: string;
   strength?: string;
   wrapperColor?: string;
   wrapper?: string;

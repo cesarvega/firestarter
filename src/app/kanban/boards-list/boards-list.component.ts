@@ -54,40 +54,54 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         });
 
         // create product
-        this.boardService.createProduct({          
-          name : 'product name',
-          active : true,
-          description : `Epic Cigars is proud to offer the Smoking Shields: a special limited release produced in honor 
-          of the non-profit organization of the same name, which raises money for law enforcement men and women and their families.
-          This medium to full-bodied Nicaraguan cigar consists of a dark and oily Brazilian maduro wrapper, Dominican binder,
-          and filler from both Nicaragua and Dominican Republic that comes together to provide delicious rich notes of espresso,
-          cocoa and leather. A portion of every sale goes towards supporting this worthy cause built around honoring those who keep us safe
-          smallDescription : 'Toro, Full, Maduro, from Dominican Republic`,
-          cigarOrigin : 'string',
-          strength : 'string',
-          wrapperColor : 'string',
-          wrapper : 'string',
-          binder : 'string',
-          filler : 'string',
-          rolledBy : 'string',
-          manufacturer : 'string',
-          sku : 'string',
-          quantitysku : 10,
-          shippingFee : 10,
-          extraShippingFee : 10,
-          price : 10,
-          boxOf : 10,
-          boxOfPrice : 10.04,
-          comparedPrice : 10,
-          taxRate : 10,
-          priceTaxExcl : 10,
-          priceTaxIncl : 10,
-          itemsInstock : 10,
-          priority : this.products.length,
-          smokeRings : 10,
-          photos : [ {description: 'one', url: 'assets/images/ecommerce/braies-lake.jpg'},
-                     {description: 'two', url: 'assets/images/ecommerce/fall-glow.jpg'}],
-        });
+
+          
+        const as =  ['1','2','3','4',5];
+        // as.forEach(element => {
+          this.boardService.createProduct(
+          
+            {  
+            name : 'Arturo Fuente',
+            active : true,
+            description : `Epic Cigars is proud to offer the Smoking Shields: a special limited release produced in honor 
+            of the non-profit organization of the same name, which raises money for law enforcement men and women and their families.
+            This medium to full-bodied Nicaraguan cigar consists of a dark and oily Brazilian maduro wrapper, Dominican binder,
+            and filler from both Nicaragua and Dominican Republic that comes together to provide delicious rich notes of espresso,
+            cocoa and leather. A portion of every sale goes towards supporting this worthy cause built around honoring those who keep us safe`,
+            smallDescription : 'Toro, Full, Maduro, Dominican Republic',
+            cigarOrigin : 'string',
+            cigarShape : 'Torpedo',
+            brands: 'american stoogies',
+            badgeNumber : 0,
+            like : false,
+            strength : 'medium',
+            wrapperColor : 'string',
+            wrapper : 'natural',
+            binder : 'nicaragua',
+            filler : 'hoduras',
+            rolledBy : 'Handmade',
+            manufacturer : 'Absolute Cigars',
+            sku : 'xfsgeukdl',
+            quantitysku : 12,
+            shippingFee : 5,
+            extraShippingFee : 3,
+            price : 10.33,
+            boxOf : 25,
+            boxOfPrice : 10.04,
+            comparedPrice : 14.34,
+            taxRate : 7,
+            priceTaxExcl : 10,
+            priceTaxIncl : 10,
+            itemsInstock : 10,
+            priority : Date.now(),
+            smokeRings : 10,
+            photos : [ {description: 'one', url: 'assets/images/cigars/601_{{i%4}}.png'},
+                       {description: 'two', url: 'assets/images/cigars/601_{{i%4}}.png'}],
+          });
+        //  });
+
+
+     
       }
     });
   }

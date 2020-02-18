@@ -137,7 +137,7 @@ export class BoardService {
   updateProducts(product: Product) {
     return this.db
       .collection('products')
-      .doc(product.id)
+      .doc(product.uid)
       .update({ product });
   }
 

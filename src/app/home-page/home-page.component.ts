@@ -2,11 +2,14 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
-import { Board, Product } from '../kanban/board.model';
-import { Subscription } from 'rxjs';
 
-import * as AOS from 'aos';
-import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+// import * as AOS from 'aos';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { HomeService } from './home.service';
+import { Product } from './home.models';
+
 
 export interface DialogData {
   animal: string;
@@ -15,7 +18,8 @@ export interface DialogData {
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
+  providers: [HomeService]
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   products: Product[];
@@ -109,22 +113,31 @@ export class HomePageComponent implements OnInit, OnDestroy {
   images: { "id": number; "url": string; }[];
 
   animal: string;
+  items: Observable<any[]>;
+  shoppingCart: Observable<Product[]>;
+  productList: Observable<any[]>;
   name: string;
-  constructor(public boardService: BoardService, public dialog: MatDialog, private scrollDispatcher: ScrollDispatcher) { }
+  constructor(public boardService: BoardService, 
+    public dialog: MatDialog, 
+    private scrollDispatcher: ScrollDispatcher, 
+    public homeService: HomeService) {     
+   
+    this.productList =  homeService.products;
+    this.shoppingCart =  homeService.shoppingCartItems;
+  }
+
   ngOnInit(): void {
 
-  
-    AOS.init();
-    this.scrollDispatcher.scrolled().subscribe(x => {
-      console.log('I am scrolling')
-    });
+    // this.scrollDispatcher.scrolled().subscribe(x => {
+    //   console.log('I am scrolling')
+    // });
 
-    this.productSub = this.boardService.getUserProducts()
-      .subscribe(products => {
-        this.products = products
-        // console.log(this.products);
-      }
-      );
+    // this.productSub = this.boardService.getUserProducts()
+    //   .subscribe(products => {
+    //     this.products = products
+    //     // console.log(this.products);
+    //   }
+    //   );
 
 
     this.images = [
@@ -157,26 +170,20 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.productSub.unsubscribe();
   }
 
-  playAudio(butonName: string) {
-
+  playAudio(butonName : string, product : Product, index?: number) {
 
     let audio = new Audio();
     switch (butonName) {
 
       case 'heart':
-        // audio.src = "assets/material_product_sounds/wav/03 Primary System Sounds/state-change_confirm-up.wav";
-
         audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_simple-01.wav";
-        if(this.whisMe){
-          
+        if(product.like){          
           audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_high-intensity.wav";
         }
-
-        this.whisMe = !this.whisMeFilled;
-        this.whisMeFilled = this.whisMe;
-
+        product.like = !product.like;
         audio.load();
         audio.play();
+        this.homeService.SetLikes(product)
         break;
 
       case 'song':
@@ -188,6 +195,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
       case 'remove':
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-03.wav";
         this.badgeNumber = this.badgeNumber - 1;
+        product.badgeNumber = product.badgeNumber - 1;
+        this.homeService.removeShoppingCartItems(index);
         audio.load();
         audio.play();
         break;
@@ -204,18 +213,30 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.play();
         break;  
 
-      default:
+      case 'shopping':
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
         this.badgeNumber = this.badgeNumber + 1;
+        product.badgeNumber = product.badgeNumber + 1;
+        this.homeService.setShoppingCartItems(product);
         audio.load();
         audio.play();
         break;
+
+      default:
+        // audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
+        // this.badgeNumber = this.badgeNumber + 1;
+        // audio.load();
+        // audio.play();
+        break;
     }
+  }
+
+  addItemToShoppingCart(product){
+
+
 
 
   }
-
-
 
   openDialog(product: Product, index :number): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
