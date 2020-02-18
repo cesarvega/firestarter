@@ -167,7 +167,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.productSub.unsubscribe();
+    // this.productSub.unsubscribe();
   }
 
   playAudio(butonName : string, product : Product, index?: number) {
@@ -183,7 +183,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         product.like = !product.like;
         audio.load();
         audio.play();
-        this.homeService.SetLikes(product)
+        this.homeService.setShoppingCartItemsAndLikes(product);
         break;
 
       case 'song':
@@ -196,7 +196,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-03.wav";
         this.badgeNumber = this.badgeNumber - 1;
         product.badgeNumber = product.badgeNumber - 1;
-        this.homeService.removeShoppingCartItems(index);
+        this.homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;
@@ -217,7 +217,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
         this.badgeNumber = this.badgeNumber + 1;
         product.badgeNumber = product.badgeNumber + 1;
-        this.homeService.setShoppingCartItems(product);
+        this.homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;

@@ -56,7 +56,8 @@
                                 <mat-icon class="box animated tada " style="font-size: 26px; animation-timing-function: ease-in;" 
                                 (click)="playAudio('heart', product); " *ngIf="!product.like">
                                     favorite_border</mat-icon>
-                                <mat-icon class="box animated  flip" style="font-size: 26px;" (click)="playAudio('heart', product)" *ngIf="product.like">favorite
+                                <mat-icon class="box animated  flip" style="font-size: 26px;" 
+                                (click)="playAudio('heart', product)" *ngIf="product.like">favorite
                                 </mat-icon>
                             </button>
                         </div>
@@ -72,7 +73,8 @@
                                     {{product.badgeNumber}}</div>
                                 <button class="mat-elevation-z4" *ngIf="product.badgeNumber===0" mat-icon-button color="black"
                                     style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; outline: none;text-align: center;">
-                                    <mat-icon style="font-size: 26px;" (click)="playAudio('shopping', product);" >shopping_basket</mat-icon>
+                                    <mat-icon style="font-size: 26px;" 
+                                    (click)="playAudio('shopping', product);" >shopping_basket</mat-icon>
                                 </button>
                             </button>
 

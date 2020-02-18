@@ -13,79 +13,51 @@ import { Product } from './home.models';
 
 @Injectable()
 export class HomeService {
-  
+
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
-    this.getShoppingCartItems();
     this.getProducts();
-    this.getLikes();
   }
 
   items: Observable<Product[]>;
   private _products = new BehaviorSubject<Product[]>([]);
   private _shoppingCartItems = new BehaviorSubject<Product[]>([]);
-  private _likeItems = new BehaviorSubject<Product[]>([]);
+  private _total = new BehaviorSubject<Product[]>([]);
+
   private dataStore: { products: Product[] } = { products: [] }; // store our data in memory
   private dataStore2: { shoppingCartItems: Product[] } = { shoppingCartItems: [] }; // store our data in memory
-  private dataStore3: { likeItems: Product[] } = { likeItems: [] }; // store our data in memory
+ 
+  // observables to subscribe
   readonly products = this._products.asObservable();
   readonly shoppingCartItems = this._shoppingCartItems.asObservable();
-  readonly likeItems = this._likeItems.asObservable();
-  orders : Product[] = [];
-  likes : Product[] = [];
-
-  setShoppingCartItems(product: Product) {
-    this.orders.push(product);
-    this.dataStore2.shoppingCartItems = this.orders;
-    localStorage.setItem('orders', JSON.stringify(this.orders));
-  }
-
-  removeShoppingCartItems(index: number) {
-    this.dataStore2.shoppingCartItems.splice(index, 1);
-    localStorage.setItem('orders', JSON.stringify(this.dataStore2.shoppingCartItems.splice(index, 1)));
-  }
-
-  getShoppingCartItems() {
-    this.dataStore2.shoppingCartItems = (JSON.parse(localStorage.getItem('orders')))?JSON.parse(localStorage.getItem('orders')): [];
-    this.setBadgeandLikes(this.dataStore2.shoppingCartItems);
-    this._shoppingCartItems.next(Object.assign({}, this.dataStore2).shoppingCartItems);
-  }
-
-  getLikes() {
-    this.dataStore.products.forEach((product)=> this.dataStore3.likeItems.forEach((likeItems=>{
-      if ( product.priority === likeItems.priority) {        
-        product.like = likeItems.like;
-      }
-    })))
-  }
-
-  SetLikes(product: Product) {
-    this.likes.push(product);
-    this.dataStore3.likeItems = this.likes;
-    localStorage.setItem('likes', JSON.stringify(this.likes));
-  }
+  readonly totalPrice = this._total.asObservable();
 
   getProducts() {
     this.db.collection<Product>('products').valueChanges().subscribe(data => {
       this.dataStore.products = data;
-      this.dataStore.products.forEach((product)=> this.dataStore2.shoppingCartItems.forEach((shoppintCartItem=>{
-        if ( product.priority === shoppintCartItem.priority) {
-          product.badgeNumber = shoppintCartItem.badgeNumber;       
+      this.dataStore2.shoppingCartItems =   JSON.parse(localStorage.getItem('orders'));
+      this.dataStore.products.forEach((product) => this.dataStore2.shoppingCartItems.forEach((shoppintCartItem => {
+        if (product.priority === shoppintCartItem.priority) {
+          product.badgeNumber = shoppintCartItem.badgeNumber;
+          product.like = shoppintCartItem.like;
         }
       })))
-      
+
       this._products.next(Object.assign({}, this.dataStore).products);
     },
       error => console.log('Could not load products.'));
   }
 
 
-  setBadgeandLikes(shoppingCartItems) {
-    const xxx = shoppingCartItems.map( item => {
-      this.dataStore.products.map(product => {item.uid === product.uid} )
-    });
-
-    console.log(xxx);
+  setShoppingCartItemsAndLikes(product: Product) {
+    if (this.dataStore2.shoppingCartItems.includes(product)) {
+      this.dataStore2.shoppingCartItems[this.dataStore2.shoppingCartItems.findIndex(x => x.priority == product.priority)].badgeNumber = product.badgeNumber;
+      this.dataStore2.shoppingCartItems[this.dataStore2.shoppingCartItems.findIndex(x => x.priority == product.priority)].like = product.like;
+    } else {      
+      this.dataStore2.shoppingCartItems.push(product);
+    }
     
+    this._shoppingCartItems.next(Object.assign({}, this.dataStore2).shoppingCartItems);
+    localStorage.setItem('orders', JSON.stringify(this.dataStore2.shoppingCartItems));
   }
 
 
