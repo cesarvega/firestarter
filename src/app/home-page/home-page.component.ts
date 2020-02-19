@@ -120,10 +120,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(public boardService: BoardService, 
     public dialog: MatDialog, 
     private scrollDispatcher: ScrollDispatcher, 
-    public homeService: HomeService) {     
+    public _homeService: HomeService) {     
    
-    this.productList =  homeService.products;
-    this.shoppingCart =  homeService.shoppingCartItems;
+    this.productList =  _homeService.products;
+    this.shoppingCart =  _homeService.shoppingCartItems;
   }
 
   ngOnInit(): void {
@@ -183,7 +183,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         product.like = !product.like;
         audio.load();
         audio.play();
-        this.homeService.setShoppingCartItemsAndLikes(product);
+        this._homeService.setShoppingCartItemsAndLikes(product);
         break;
 
       case 'song':
@@ -196,7 +196,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-03.wav";
         this.badgeNumber = this.badgeNumber - 1;
         product.badgeNumber = product.badgeNumber - 1;
-        this.homeService.setShoppingCartItemsAndLikes(product);
+        this._homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;
@@ -217,7 +217,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
         this.badgeNumber = this.badgeNumber + 1;
         product.badgeNumber = product.badgeNumber + 1;
-        this.homeService.setShoppingCartItemsAndLikes(product);
+        this._homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;

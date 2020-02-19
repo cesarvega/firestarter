@@ -75,4 +75,18 @@ export interface Product {
     url?: string;
   }
   
+  export interface item {
+    itemUnitPrice: number;
+    itemQuantity: number;
+    itemTotal: number;
+    itleLiked: boolean;    
+  }
+  
+  export interface OrderCalc {
+    orderTotal: number;
+    items: item[];
+    orderDate: Date;
+    customerId: string;
+  }
+  
 
