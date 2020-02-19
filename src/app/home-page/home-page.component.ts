@@ -277,8 +277,6 @@ export class DialogOverviewExampleDialog implements OnInit{
   constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
-
       this.name =this.data.name;
       this.desc = this.data.desc;
       this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';

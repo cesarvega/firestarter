@@ -109,13 +109,10 @@
             <!-- CELL -->
 
         </div>
-        <div class="row footer animated slideInRight" style="animation-delay: 0.5s;">
+        <!-- <div class="row footer animated slideInRight" style="animation-delay: 0.5s;">
+
             <div class="col-12" fxLayoutAlign="center center" >
-          
-              <!-- <button mat-button class="" style="outline: none;">
-                <span style="font-size: 35px; outline: none;font-family: hackers;color: white;background-color: black;">$</span>
-          
-              </button> -->
+        
               <div matRipple matRippleColor="rgba(255,255,255,.5)" class="rounded-pill mat-elevation-z4 btn animated jackInTheBox"
                 style="background-color: black;
                outline: none;
@@ -174,8 +171,41 @@
               </div>
           
             </div>
-          </div>
-    </div>
+          </div> -->
+   
+          <div class="footer">
+            <div class="no-gutters">
+                <div class="col-auto mx-auto">
+                    <div class="row no-gutters justify-content-center">
+                        <div class="col-auto">
+                            <a href="index.html" class="btn btn-link-default ">
+                                <i class="material-icons">store_mall_directory</i>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="/detail" class="btn btn-link-default">
+                                <i class="material-icons">insert_chart_outline</i>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                                <span class="paybutton rounded-pill mat-elevation-z4 btn animated jackInTheBox" >$:{{totalOrderPrice | number:'1.0-2' }}</span><br>
+                            
+                        </div>
+                        <div class="col-auto">
+                            <a href="favorite-products.html" class="btn btn-link-default active">
+                                <i class="material-icons">favorite</i>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="profile.html" class="btn btn-link-default">
+                                <i class="material-icons">account_circle</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 </div>
 
 
