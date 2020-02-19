@@ -111,6 +111,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   whisMeFilled = false;
   badgeNumber = 0;
   totalOrderPrice = 10;
+  footerReady = false;
   images: { "id": number; "url": string; }[];
 
   animal: string;
@@ -128,6 +129,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.productList =  _homeService.products;
     this.shoppingCart =  _homeService.shoppingCartItems;
     _homeService.totalOrder$.subscribe(res=> { this.totalOrderPrice = res.orderTotal})
+    setTimeout(() => {
+      this.footerReady = true;
+    }, 1000);
   }
 
   ngOnInit(): void {
