@@ -84,7 +84,7 @@ export interface Product {
   
   export interface OrderCalc {
     orderTotal: number;
-    items: item[];
+    items: Product[];
     orderDate: Date;
     customerId: string;
   }

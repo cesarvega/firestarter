@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Output, EventEmitter } from '@angular/core';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
@@ -110,6 +110,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   whisMe = false;
   whisMeFilled = false;
   badgeNumber = 0;
+  totalOrderPrice = 10;
   images: { "id": number; "url": string; }[];
 
   animal: string;
@@ -117,6 +118,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   shoppingCart: Observable<Product[]>;
   productList: Observable<any[]>;
   name: string;
+  
+  @Output() valueChange = new EventEmitter();
   constructor(public boardService: BoardService, 
     public dialog: MatDialog, 
     private scrollDispatcher: ScrollDispatcher, 
@@ -124,6 +127,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
    
     this.productList =  _homeService.products;
     this.shoppingCart =  _homeService.shoppingCartItems;
+    _homeService.totalOrder$.subscribe(res=> { this.totalOrderPrice = res.orderTotal})
   }
 
   ngOnInit(): void {
@@ -196,7 +200,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-03.wav";
         this.badgeNumber = this.badgeNumber - 1;
         product.badgeNumber = product.badgeNumber - 1;
-        this._homeService.setShoppingCartItemsAndLikes(product);
+        this.totalOrderPrice = this._homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;
@@ -217,7 +221,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
         this.badgeNumber = this.badgeNumber + 1;
         product.badgeNumber = product.badgeNumber + 1;
-        this._homeService.setShoppingCartItemsAndLikes(product);
+        this.totalOrderPrice = this._homeService.setShoppingCartItemsAndLikes(product);
         audio.load();
         audio.play();
         break;

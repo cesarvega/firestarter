@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 // import { Beehavio } from 'rxjs/BehaviorSubject';
 
 // import { Customer, Order, Product } from '../entities/data';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
@@ -14,6 +14,7 @@ import { Product, item, Order, OrderCalc } from './home.models';
 @Injectable()
 export class HomeService {
 
+
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
     this.getProducts();
   }
@@ -21,54 +22,48 @@ export class HomeService {
   items: Observable<Product[]>;
   private _products = new BehaviorSubject<Product[]>([]);
   private _shoppingCartItems = new BehaviorSubject<Product[]>([]);
-  private _total = new BehaviorSubject<number>(0);
+  private _total = new BehaviorSubject<OrderCalc>({ orderTotal: 0, items: [], orderDate: new Date(), customerId: '' });
 
   private dataStore: { products: Product[] } = { products: [] }; // store our data in memory
   private dataStore2: { shoppingCartItems: Product[] } = { shoppingCartItems: [] }; // store our data in memory
-  private totalStore: { totalPrice: number } = { totalPrice: 0 }; // store our data in memory
+  private totalStore: { totalOrder$: OrderCalc } = { totalOrder$: { orderTotal: 0, items: [], orderDate: new Date(), customerId: '', } }; // store our data in memory
 
   // observables to subscribe
   readonly products = this._products.asObservable();
   readonly shoppingCartItems = this._shoppingCartItems.asObservable();
-  readonly totalPrice = this._total.asObservable();
+  readonly totalOrder$ = this._total.asObservable();
   item: item;
   orderedItems: item[];
   orderCalculation: OrderCalc;
+  @Output() valueChange = new EventEmitter();
 
   getProducts() {
-    this.totalStore.totalPrice = 0;
     this.db.collection<Product>('products').valueChanges().subscribe(data => {
       this.dataStore.products = data;
-      this.dataStore2.shoppingCartItems = JSON.parse(localStorage.getItem('orders'));
+      this.dataStore2.shoppingCartItems = localStorage.getItem('orders') ? JSON.parse(localStorage.getItem('orders')) : [];;
       this.dataStore.products.forEach((product) => this.dataStore2.shoppingCartItems.forEach((shoppingCartItem => {
-        if (shoppingCartItem) 
+        if (shoppingCartItem)
           if (product.priority === shoppingCartItem.priority) {
             product.badgeNumber = shoppingCartItem.badgeNumber;
             product.like = shoppingCartItem.like;
-            this.item.itemQuantity = shoppingCartItem.badgeNumber;
-            this.item.itemUnitPrice = shoppingCartItem.price;
-            this.item.itemTotal = shoppingCartItem.price * shoppingCartItem.badgeNumber;
-            this.item.itleLiked = shoppingCartItem.like;
-            // calculate 
-            this.orderedItems.push(this.item);// array of items ordered
-            // order object ready to be paid
-            this.orderCalculation.orderTotal += this.item.itemTotal;
-            this.orderCalculation.items.push(this.item);
-
-
+            // calculate            
+            this.totalStore.totalOrder$.orderTotal += shoppingCartItem.price * shoppingCartItem.badgeNumber;
+            this.totalStore.totalOrder$.items.push(shoppingCartItem);
           }
-        })))
-      this.orderCalculation.orderDate = new Date();
-      this.orderCalculation.customerId = 'LpVdaZbBcHZpgl5Uib6flNjQfJH3';
-      console.log('order total : ' + this.orderCalculation.orderTotal);
-
+      })))
+      this.totalStore.totalOrder$.orderDate = new Date();
+      this.totalStore.totalOrder$.customerId = 'LpVdaZbBcHZpgl5Uib6flNjQfJH3';
+      this._total.next(Object.assign({}, this.totalStore).totalOrder$);
       this._products.next(Object.assign({}, this.dataStore).products);
+      this.calculateTotal();
+      // this.totalOrder$.subscribe(res => console.log('totalOrder$ : ' + res));
+
     },
       error => console.log('Could not load products.'));
   }
 
 
-  setShoppingCartItemsAndLikes(product: Product) {
+  setShoppingCartItemsAndLikes(product: Product): number {
     if (this.dataStore2.shoppingCartItems.includes(product)) {
       this.dataStore2.shoppingCartItems[this.dataStore2.shoppingCartItems.findIndex(x => x.priority == product.priority)].badgeNumber = product.badgeNumber;
       this.dataStore2.shoppingCartItems[this.dataStore2.shoppingCartItems.findIndex(x => x.priority == product.priority)].like = product.like;
@@ -78,12 +73,33 @@ export class HomeService {
 
     this._shoppingCartItems.next(Object.assign({}, this.dataStore2).shoppingCartItems);
     localStorage.setItem('orders', JSON.stringify(this.dataStore2.shoppingCartItems));
-    let totalSum;
-    this.dataStore2.shoppingCartItems.forEach(product => {
-      totalSum += product.price;
-    });
-    this._total.next(totalSum);
+    this.totalStore.totalOrder$.orderTotal = 0;
+    this.calculateTotal();
+    
+    this.totalStore.totalOrder$.items = this.dataStore2.shoppingCartItems;
+    this.totalStore.totalOrder$.orderDate = new Date();
+    this.totalStore.totalOrder$.customerId = 'LpVdaZbBcHZpgl5Uib6flNjQfJH3';
+    // this.totalOrder$.subscribe(r => {
+    //   console.log('total as observable public var :' + r.orderTotal);
+    // })
 
+
+    this._total.next(Object.assign({}, this.totalStore).totalOrder$);
+    this.totalStore.totalOrder$.orderTotal = this.totalStore.totalOrder$.orderTotal
+    // this.valueChange.emit(this.totalStore.totalOrder$.orderTotal);
+
+    return this.totalStore.totalOrder$.orderTotal;
+
+  }
+
+  calculateTotal(): number{
+    this.dataStore2.shoppingCartItems.forEach((shoppingCartItem => {
+    
+        this.totalStore.totalOrder$.orderTotal += shoppingCartItem.price * shoppingCartItem.badgeNumber;
+     
+    }));
+
+    return this.totalStore.totalOrder$.orderTotal;
   }
 
 
