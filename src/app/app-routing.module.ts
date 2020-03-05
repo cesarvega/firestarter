@@ -9,6 +9,7 @@ import { TraxComponent } from './trax/trax.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GridComponent } from './grid/grid.component';
 
+import { DesktopComponent } from './home-page/desktop/desktop.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'detail',
     component: DetailPageComponent
+  },
+  {
+    path: 'desktop',
+    component:DesktopComponent
   },
   {
     path: 'login',
