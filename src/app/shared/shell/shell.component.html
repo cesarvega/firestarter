@@ -1,11 +1,11 @@
 <div fxLayout="row" class="mat-elevation-z8 animated rubberBand" fxLayoutAlign="center center" (valueChange)="playCashRegister($event)"
   style="background-color: black;" *ngIf="islogoWooble">
-  <!-- <span routerLink="/detail"><img src="assets/images/cigars/cigarTotalLabel.png" class="logo " alt="Absolute"></span> -->
+  <span routerLink="/detail"><img src="assets/images/cigars/cigarTotalLabel.png" class="logo " alt="Absolute"></span>
 
 </div>
 
 <div fxLayoutAlign="center center" style="background-color: #e9ecef;">
-  <!-- <ngb-carousel *ngIf="images && !(isHandset$ | async)">
+  <ngb-carousel *ngIf="images && !(isHandset$ | async)">
     <ng-template ngbSlide>
       <div class="picsum-img-wrapper">
         <img [src]="images[0]" alt="Random first slide">
@@ -33,7 +33,7 @@
         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
       </div>
     </ng-template>
-  </ngb-carousel> -->
+  </ngb-carousel>
 
 </div>
 <ng-content ></ng-content>

@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { HomeService } from '../home.service';
 import { Product } from '../home.models';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-desktop',
@@ -16,6 +18,12 @@ import { Product } from '../home.models';
   styleUrls: ['./desktop.component.scss']
 })
 export class DesktopComponent implements OnInit, OnDestroy {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
   products: Product[];
   productSub: Subscription;
   playMusicOnce = false;
@@ -115,7 +123,7 @@ export class DesktopComponent implements OnInit, OnDestroy {
   name: string;
   
   @Output() valueChange = new EventEmitter();
-  constructor(public boardService: BoardService, 
+  constructor(public boardService: BoardService,private breakpointObserver: BreakpointObserver, 
     public dialog: MatDialog, 
     private scrollDispatcher: ScrollDispatcher, 
     public _homeService: HomeService) {     
