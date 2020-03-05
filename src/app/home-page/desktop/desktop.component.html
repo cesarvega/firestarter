@@ -1,7 +1,7 @@
 <div class="container" *ngIf="!(isHandset$ | async)">
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
+            <div class="row mb-12">
                 <div class="col-md-4 mb-4" fxLayoutGap="40px"
                     *ngFor="let product of productList | async ; let i = index ">
                     <div class="card">
