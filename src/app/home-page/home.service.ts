@@ -40,7 +40,7 @@ export class HomeService {
   getProducts() {
     this.db.collection<Product>('products').valueChanges().subscribe(data => {
       this.dataStore.products = data;
-      this.dataStore2.shoppingCartItems = localStorage.getItem('orders') ? JSON.parse(localStorage.getItem('orders')) : [];;
+      this.dataStore2.shoppingCartItems = localStorage.getItem('orders') ? JSON.parse(localStorage.getItem('orders')) : [];
       this.dataStore.products.forEach((product) => this.dataStore2.shoppingCartItems.forEach((shoppingCartItem => {
         if (shoppingCartItem)
           if (product.priority === shoppingCartItem.priority) {

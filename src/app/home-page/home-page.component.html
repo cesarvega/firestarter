@@ -1,16 +1,16 @@
 
 <div class="container">
     <!-- Search form -->
-<input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="test">
+<input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchInputVal">
 <br>
 </div>
 
-<div class="container" style="height: 99%;" *ngIf="!(isHandset$ | async)">
+<div class="container" style="height: 100%" *ngIf="!(isHandset$ | async)">
     <div class="row">
         <div class="col-md-12">
             <div class="row mb-12">
                 <div class="col-md-6  col-lg-4 mb-4" fxLayoutGap="40px"
-                    *ngFor="let product of ( productList | async | search:'name,brands':test) ; let i = index ">
+                    *ngFor="let product of ( productList | async | search:'name,brands':searchInputVal) ; let i = index ">
                     <div class="card">
                         <h5 class="card-header">
                             <h6 style="font-family: caviar;padding-top: 10px; font-size: 23px;">
@@ -121,9 +121,11 @@
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a href="#" class="btn btn-link-default">
-                                    <i class="material-icons">account_circle</i>
-                                </a>
+                                <span (click)="openPayment()" class="btn btn-link-default">
+                                    <i class="material-icons">
+                                        shopping_cart
+                                        </i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -274,7 +276,7 @@
                             </a>
                         </div>
                         <div class="col-4" fxLayoutAlign="center">
-                            <span routerLink="/details" matRipple matRippleColor="rgba(255,255,255,.5)"
+                            <span (click)="openPayment()"  routerLink="/details" matRipple matRippleColor="rgba(255,255,255,.5)"
                                 class="paybutton rounded-pill mat-elevation-z4 btn animated jackInTheBox">
                                 <div style="position: absolute; outline: none;
                                     top: 11px;">YOU PAY $:{{totalOrderPrice | number:'1.0-2' }}</div>
@@ -287,18 +289,26 @@
                             </a>
                         </div>
                         <div class="col-2">
-                            <a href="profile.html" class="btn btn-link-default">
-                                <i class="material-icons">account_circle</i>
-                            </a>
+                            <span (click)="openPayment()" class="btn btn-link-default">
+                                <i class="material-icons">
+                                    shopping_cart
+                                    </i>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
 </div>
 <div class="row">
     <div class="col-md-12">
+        <br>
+        <br>
+        <br>
+        <!-- <main>
         <!-- <main>
             <header style="background-color: blueviolet;">topbar</header>
             <aside style="background-color: red;">aside</aside>

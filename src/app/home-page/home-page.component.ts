@@ -127,30 +127,21 @@ export class HomePageComponent implements OnInit, OnDestroy {
   shoppingCart: Observable<Product[]>;
   productList: Observable<any[]>;
   name: string;
-  
+  searchInputVal;
   @Output() valueChange = new EventEmitter();
-  constructor(public boardService: BoardService, private breakpointObserver: BreakpointObserver, 
-    public dialog: MatDialog, 
-    private scrollDispatcher: ScrollDispatcher, 
-    public _homeService: HomeService) {     
-   
-    this.productList =  _homeService.products;
-    this.shoppingCart =  _homeService.shoppingCartItems;
-    _homeService.totalOrder$.subscribe(res=> { this.totalOrderPrice = res.orderTotal})
+  constructor(public boardService: BoardService, private breakpointObserver: BreakpointObserver,
+    public dialog: MatDialog,
+    private scrollDispatcher: ScrollDispatcher,
+    public _homeService: HomeService) {
+
+    this.productList = _homeService.products;
+    this.shoppingCart = _homeService.shoppingCartItems;
+    _homeService.totalOrder$.subscribe(res => { this.totalOrderPrice = res.orderTotal })
     setTimeout(() => {
       this.footerReady = true;
     }, 1000);
   }
-test;
-  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
 
-  product = {
-    price: 777.77,
-    description: 'used couch, decent condition',
-    img: 'assets/couch.jpg'
-  };
-
-  paidFor = false;
   ngOnInit(): void {
 
     // this.scrollDispatcher.scrolled().subscribe(x => {
@@ -163,31 +154,7 @@ test;
     //     // console.log(this.products);
     //   }
     //   );
-    
-    paypal
-    .Buttons({
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [
-            {
-              description: this.product.description,
-              amount: {
-                currency_code: 'USD',
-                value: this.product.price
-              }
-            }
-          ]
-        });
-      },
-      onApprove: async (data, actions) => {
-        const order = await actions.order.capture();
-        this.paidFor = true;
-        console.log(order);
-      },
-      onError: err => {
-        console.log(err);
-      }
-    })
+
     // .render(this.paypalElement.nativeElement);
 
     this.images = [
@@ -208,17 +175,17 @@ test;
         audio.play();
         this.playMusicOnce = false;
       }, 1000);
-     
-    
+
+
     }
 
 
   }
 
-  playCashRegister(total){
+  playCashRegister(total) {
     // this.orderTotal.subscribe(r=>{
     //   console.log('from shell: ' + r.orderTotal);
-      
+
     // })
     console.log('from shell: ' + total)
     let audio = new Audio();
@@ -227,22 +194,22 @@ test;
     audio.load();
     audio.play();
 
-    
-  
+
+
   }
 
   ngOnDestroy(): void {
     // this.productSub.unsubscribe();
   }
 
-  playAudio(butonName : string, product : Product, index?: number) {
+  playAudio(butonName: string, product: Product, index?: number) {
 
     let audio = new Audio();
     switch (butonName) {
 
       case 'heart':
         audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_simple-01.wav";
-        if(product.like){          
+        if (product.like) {
           audio.src = "assets/material_product_sounds/wav/02 Alerts and Notifications/notification_high-intensity.wav";
         }
         product.like = !product.like;
@@ -276,7 +243,7 @@ test;
         audio.src = "assets/material_product_sounds/wav/04 Secondary System Sounds/alert_error-02.wav";
         audio.load();
         audio.play();
-        break;  
+        break;
 
       case 'shopping':
         audio.src = "assets/material_product_sounds/wav/01 Hero Sounds/hero_simple-celebration-01.wav";
@@ -296,20 +263,20 @@ test;
     }
   }
 
-  addItemToShoppingCart(product){
+  addItemToShoppingCart(product) {
 
 
 
 
   }
 
-  openDialog(product: Product, index :number): void {
+  openDialog(product: Product, index: number): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '95%',
       // width: '98%',
-      data: {name: product.name, desc: product.smallDescription, index}
+      data: { name: product.name, desc: product.smallDescription, index }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -317,13 +284,13 @@ test;
       this.animal = result;
     });
   }
-  openPayment(product: Product, index :number): void {
+  openPayment(product: Product, index: number): void {
     const dialogRef = this.dialog.open(PaymentCard, {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '95%',
       // width: '98%',
-      data: {name: 'product.name', desc: 'product.smallDescription', index}
+      data: { name: 'product.name', desc: 'product.smallDescription', index }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -341,58 +308,58 @@ test;
   templateUrl: 'detail-page.html',
   styleUrls: ['detail-page.scss']
 })
-export class DialogOverviewExampleDialog implements OnInit{
+export class DialogOverviewExampleDialog implements OnInit {
   name: any;
   indexImage = 'assets/images/cigars/601_3.png'
   animal: any;
-  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
   desc: any; private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
   location: any;
   constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.name =this.data.name;
-      this.desc = this.data.desc;
-      this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
-      console.log('data', this.data);
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
-
-    }
-
-    ngOnInit(): void {
-     
-      this.router.events.subscribe((ev:any) => {
-        if (ev instanceof NavigationStart) {
-            if (ev.url != this.lastPoppedUrl)
-                this.yScrollStack.push(window.scrollY);
-        } else if (ev instanceof NavigationEnd) {
-            if (ev.url == this.lastPoppedUrl) {
-                this.lastPoppedUrl = undefined;
-                window.scrollTo(0, this.yScrollStack.pop());
-            } else
-                window.scrollTo(0, 0);
-        }
-    });
+    this.name = this.data.name;
+    this.desc = this.data.desc;
+    this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
+    console.log('data', this.data);
     window.scroll({
-      top: 0, 
-      left: 0, 
+      top: 0,
+      left: 0,
       behavior: 'smooth'
     });
-    }
-    ngAfterContentInit(){
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
-    }
+
+  }
+
+  ngOnInit(): void {
+
+    this.router.events.subscribe((ev: any) => {
+      if (ev instanceof NavigationStart) {
+        if (ev.url != this.lastPoppedUrl)
+          this.yScrollStack.push(window.scrollY);
+      } else if (ev instanceof NavigationEnd) {
+        if (ev.url == this.lastPoppedUrl) {
+          this.lastPoppedUrl = undefined;
+          window.scrollTo(0, this.yScrollStack.pop());
+        } else
+          window.scrollTo(0, 0);
+      }
+    });
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+  ngAfterContentInit() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
   onNoClick(): void {
-    
+
     this.dialogRef.close();
   }
 
@@ -402,105 +369,79 @@ export class DialogOverviewExampleDialog implements OnInit{
 @Component({
   selector: 'app-detail',
   templateUrl: 'payment-screen.html',
-  styleUrls: ['payment-screen.scss']
+  styleUrls: ['payment-screen.scss'],
+  providers: [HomeService]
 })
-export class PaymentCard implements OnInit{
-  name: any;
-  indexImage = 'assets/images/cigars/601_3.png'
-  animal: any;
-  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
-  desc: any; private lastPoppedUrl: string;
-  private yScrollStack: number[] = [];
-  location: any;
-  test;
+export class PaymentCard implements OnInit {
+
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
 
   product = {
-    price: 7.77,
-    description: 'used couch, decent condition',
-    img: 'assets/couch.jpg'
+    price: 1.33,
+    description: 'item product description',
+    img: 'src="assets/images/cigars/601_1.png" '
   };
   paidFor: boolean;
-  constructor(private router: Router,
+  shoppingCart: any;
+
+  constructor(private router: Router, public _homeService: HomeService,
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.name =this.data.name;
-      this.desc = this.data.desc;
-      this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
-      console.log('data', this.data);
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
 
-    }
 
-    ngOnInit(): void {
-     
-      this.router.events.subscribe((ev:any) => {
-        if (ev instanceof NavigationStart) {
-            if (ev.url != this.lastPoppedUrl)
-                this.yScrollStack.push(window.scrollY);
-        } else if (ev instanceof NavigationEnd) {
-            if (ev.url == this.lastPoppedUrl) {
-                this.lastPoppedUrl = undefined;
-                window.scrollTo(0, this.yScrollStack.pop());
-            } else
-                window.scrollTo(0, 0);
-        }
-    });
+    this.shoppingCart = this._homeService.products;
+    // this.name =this.data.name;
+    // this.desc = this.data.desc;
+    // this.indexImage = 'assets/images/cigars/601_' + this.data.index + '.png';
+    console.log('data', this.data);
     window.scroll({
-      top: 0, 
-      left: 0, 
+      top: 0,
+      left: 0,
       behavior: 'smooth'
     });
 
+  }
 
-
+  ngOnInit(): void {
     paypal
-    .Buttons({
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [
-            {
-              description: this.product.description,
-              amount: {
-                currency_code: 'USD',
-                value: this.product.price
+      .Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: this.product.description,
+                amount: {
+                  currency_code: 'USD',
+                  value: this.product.price
+                }
               }
-            }
-          ]
-        });
-      },
-      onApprove: async (data, actions) => {
-        const order = await actions.order.capture();
-        this.paidFor = true;
-        console.log(order);
-      },
-      onError: err => {
-        console.log(err);
-      }
-    })
-    .render(this.paypalElement.nativeElement);
+            ]
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          this.paidFor = true;
+          console.log(order);
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+      .render(this.paypalElement.nativeElement);
 
-    }
-    ngAfterContentInit(){
-      window.scroll({
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
-      });
-    }
+  }
+  ngAfterContentInit() {
+
+  }
   onNoClick(): void {
-    
+
     this.dialogRef.close();
   }
 
 }
 
 
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'search'
