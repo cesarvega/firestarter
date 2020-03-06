@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // App Modules
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomePageComponent, DialogOverviewExampleDialog, SearchPipe } from './home-page/home-page.component';
+import { HomePageComponent, DialogOverviewExampleDialog, SearchPipe, PaymentCard } from './home-page/home-page.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 
@@ -35,6 +35,7 @@ import { DesktopComponent } from './home-page/desktop/desktop.component';
     AppComponent,
     HomePageComponent,
     DialogOverviewExampleDialog,
+    PaymentCard,
     DetailPageComponent,
     GalleryComponent,
     AppGalleryComponent,
@@ -62,7 +63,7 @@ import { DesktopComponent } from './home-page/desktop/desktop.component';
     OwlModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  entryComponents: [DialogOverviewExampleDialog],
+  entryComponents: [DialogOverviewExampleDialog,PaymentCard],
 
   providers: [],
   bootstrap: [AppComponent]
