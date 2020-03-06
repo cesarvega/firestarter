@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // App Modules
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomePageComponent, DialogOverviewExampleDialog } from './home-page/home-page.component';
+import { HomePageComponent, DialogOverviewExampleDialog, SearchPipe } from './home-page/home-page.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 
@@ -41,7 +41,8 @@ import { DesktopComponent } from './home-page/desktop/desktop.component';
     TraxComponent,
     CheckoutComponent,
     GridComponent,
-    DesktopComponent
+    DesktopComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

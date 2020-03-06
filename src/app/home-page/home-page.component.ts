@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from '../kanban/board.service';
@@ -9,7 +9,10 @@ import { Observable } from 'rxjs';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { HomeService } from './home.service';
 import { Product } from './home.models';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
+declare var paypal;
 
 export interface DialogData {
   animal: string;
@@ -22,6 +25,11 @@ export interface DialogData {
   providers: [HomeService]
 })
 export class HomePageComponent implements OnInit, OnDestroy {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
   products: Product[];
   productSub: Subscription;
   playMusicOnce = false;
@@ -121,7 +129,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   name: string;
   
   @Output() valueChange = new EventEmitter();
-  constructor(public boardService: BoardService, 
+  constructor(public boardService: BoardService, private breakpointObserver: BreakpointObserver, 
     public dialog: MatDialog, 
     private scrollDispatcher: ScrollDispatcher, 
     public _homeService: HomeService) {     
@@ -133,7 +141,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.footerReady = true;
     }, 1000);
   }
+test;
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
 
+  product = {
+    price: 777.77,
+    description: 'used couch, decent condition',
+    img: 'assets/couch.jpg'
+  };
+
+  paidFor = false;
   ngOnInit(): void {
 
     // this.scrollDispatcher.scrolled().subscribe(x => {
@@ -146,7 +163,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
     //     // console.log(this.products);
     //   }
     //   );
-
+    
+    paypal
+    .Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [
+            {
+              description: this.product.description,
+              amount: {
+                currency_code: 'USD',
+                value: this.product.price
+              }
+            }
+          ]
+        });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        this.paidFor = true;
+        console.log(order);
+      },
+      onError: err => {
+        console.log(err);
+      }
+    })
+    .render(this.paypalElement.nativeElement);
 
     this.images = [
       { "id": 1, "url": "assets/img/header.jpeg" },
@@ -173,6 +215,21 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
+  playCashRegister(total){
+    // this.orderTotal.subscribe(r=>{
+    //   console.log('from shell: ' + r.orderTotal);
+      
+    // })
+    console.log('from shell: ' + total)
+    let audio = new Audio();
+    audio.src = "assets/material_product_sounds/mrvr/Cash Register Sound Effect.mp3";
+    audio.volume = 0.1;
+    audio.load();
+    audio.play();
+
+    
+  
+  }
 
   ngOnDestroy(): void {
     // this.productSub.unsubscribe();
@@ -251,7 +308,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '95%',
-      width: '98%',
+      // width: '98%',
       data: {name: product.name, desc: product.smallDescription, index}
     });
 
@@ -325,4 +382,19 @@ export class DialogOverviewExampleDialog implements OnInit{
     this.dialogRef.close();
   }
 
+}
+
+
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+  name: 'search'
+})
+export class SearchPipe implements PipeTransform {
+  public transform(value, keys: string, term: string) {
+
+    if (!term) return value;
+    return (value || []).filter(item => keys.split(',').some(key => item.hasOwnProperty(key) && new RegExp(term, 'gi').test(item[key])));
+
+  }
 }

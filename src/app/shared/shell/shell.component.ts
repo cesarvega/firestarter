@@ -16,7 +16,8 @@ export class ShellComponent implements OnInit {
   totalOrderPrice = 0;
   orderTotal: Observable<any>;
   orderTotalNumber = 0;
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  // images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  images = ['assets/images/cigars/c0.jpg', 'assets/images/cigars/c1.jpg', 'assets/images/cigars/c2.jpg'];
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
     .pipe(
       map(result => result.matches),
